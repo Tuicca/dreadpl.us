@@ -33,7 +33,7 @@
   }
 
   .member-image {
-    width: 120px;
+    width: 100px;
     height: auto;
     border-radius: 15px;
   }
@@ -46,6 +46,4 @@
   .member:hover {
     cursor: pointer;
     -webkit-transform: scale(1.1);
-
-    
   }

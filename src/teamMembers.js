@@ -4,5 +4,6 @@ const teamMembers = [
   { server: 'Mal\'ganis', name: 'Eremes' },
   { server: 'Frostmane', name: 'Tuicca' },
   { server: 'Ner\'zhul', name: 'Yokoyama' },
+  { server: 'Tichondrius', name: 'Claws' }
 ];
 export default teamMembers

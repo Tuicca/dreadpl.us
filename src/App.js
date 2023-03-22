@@ -5,9 +5,11 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Member from './components/Member';
 import teamMembers from './teamMembers';
+import MemberDetails from './components/MemberDetails';
 
 function App() {
   const [characters, setCharacters] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
 
   useEffect(() => {
     const fetchteamMembers = async () => {
@@ -28,22 +30,32 @@ function App() {
     fetchteamMembers();
   }, []);
 
+  const handleMemberClick = (character) => {
+    setSelectedMember(character);
+  };
   const handleCharacterSearch = (newCharacter) => {
     setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
   };
 
   return (
+    <div className="page-container">
     <div className="App">
       <Navbar onCharacterSearch={handleCharacterSearch} />
       <div className="content">
         <div className="members-container">
         {characters.map((character, index) => (
-          <Member key={index} character={character} />
+          <Member key={index} 
+          character={character} 
+          onMemberClick={handleMemberClick}/>
         ))}
         </div>
+        {selectedMember && ( // Step 7
+          <MemberDetails character={selectedMember} />
+        )}
         <Home />
         {/* Your other components and content */}
       </div>
+    </div>
     </div>
   );
 }
