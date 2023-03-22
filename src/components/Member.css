@@ -1,0 +1,51 @@
+.member-role-icon {
+    width: 24px;
+    height: auto;
+    margin-left: 10px; /* adjust the spacing between the text and the icon */
+  }
+
+  .members-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 200px;
+    gap: 100px; /* Optional: Add some space between Member components */
+    background-color: #282a36;
+
+  }
+  .member-class-spec {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.15);
+    padding: 80px;
+    margin: 10px;
+    background-color: #181920;
+    color: white;
+    border-radius: 15px;
+    transition-duration: 0.5s; 
+  }
+
+  .member-image {
+    width: 120px;
+    height: auto;
+    border-radius: 15px;
+  }
+  
+  .member-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .member:hover {
+    cursor: pointer;
+    -webkit-transform: scale(1.1);
+
+    
+  }
