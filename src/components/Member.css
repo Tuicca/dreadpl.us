@@ -1,5 +1,5 @@
 .member-role-icon {
-    width: 24px;
+    width: 30px;
     height: auto;
     margin-left: 10px; /* adjust the spacing between the text and the icon */
   }
@@ -23,13 +23,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.15);
-    padding: 80px;
-    margin: 10px;
-    background-color: #181920;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+    padding: 100px;
+    margin: 20px;
+    background-color: rgb(17, 18, 22);
     color: white;
     border-radius: 15px;
-    transition-duration: 0.5s; 
+    transition-duration: 0.2s; 
   }
 
   .member-image {
@@ -45,5 +45,6 @@
 
   .member:hover {
     cursor: pointer;
+    background-color: rgb(13, 16, 17);
     -webkit-transform: scale(1.1);
   }

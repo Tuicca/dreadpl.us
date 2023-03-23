@@ -1,0 +1,55 @@
+.dungeon-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .member-dungeons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .member-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .dungeon-info {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    align-items: center;
+  }
+
+.dungeon-name {
+    color: white;
+    text-align: right;
+  }
+  
+  .dungeon-level {
+    color: white;
+    text-align: right;
+  }
+  
+  .dungeon-time {
+    color: white;
+  }
+  .dungeon-breakdown-title{
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+    padding: 15px;
+    border-radius: 15px;
+  }
+  .run-types {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .main-runs,
+  .alternate-runs {
+    width: 45%;
+  }
+  

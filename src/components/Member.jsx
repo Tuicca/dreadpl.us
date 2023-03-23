@@ -5,16 +5,6 @@ import tankIcon from '../images/tank.png';
 import healingIcon from '../images/healer.png';
 import dpsIcon from '../images/damage.png';
 
-/*
-const defaultcharacter = {
-  thumbnail_url: 'https://render.worldofwarcraft.com/us/character/malganis/130/235234178-avatar.jpg?alt=wow/static/images/2d/avatar/10-0.jpg',
-  name:'Eremes',
-  class:'Demon Hunter',
-  spec: 'Havoc',
-  score:'2500',
-};
-*/
-
 const roleIconMapping = {
   TANK: tankIcon,
   HEALING: healingIcon,
