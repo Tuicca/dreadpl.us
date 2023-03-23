@@ -8,7 +8,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 200px;
+    padding-top: 150px;
     gap: 100px; /* Optional: Add some space between Member components */
     background-color: #282a36;
 

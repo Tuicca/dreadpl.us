@@ -43,7 +43,7 @@ const getScoreColor = (score) => {
   }
 };
 
-const Member = ({ character }) => {
+const Member = ({ character, onMemberClick }) => {
   const displayCharacter = character;
   const roleIcon = getRoleIcon(displayCharacter.active_spec_role);
 
