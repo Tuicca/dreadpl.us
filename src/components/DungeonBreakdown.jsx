@@ -7,33 +7,38 @@ const DungeonBreakdown = () => {
     const [dungeonData, setDungeonData] = useState([]);
     const [alternateDungeonData, setAlternateDungeonData] = useState([]);
 
+    const dungeonOrder = ['SBG', 'COS', 'TJS', 'HOV', 'AA', 'AV', 'RLP', 'NO'];
 
     useEffect(() => {
       const fetchDungeonData = async () => {
         const fetchedDungeonData = [];
-        const fetchedAlternateDungeonData = [];
+
       
         for (const defaultCharacter of teamMembers) {
           const mainResult = await axios(
             `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_best_runs%3Aall`
           );
-          fetchedDungeonData.push(mainResult.data);
-      
-          const alternateResult = await axios(
+          const altResult = await axios(
             `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_alternate_runs%3Aall`
-          );
-          fetchedAlternateDungeonData.push(alternateResult.data);
+          );  
+          //Big Concat before sorting
+          const combinedRuns = mainResult.data.mythic_plus_best_runs.concat(altResult.data.mythic_plus_alternate_runs);
+          mainResult.data.mythic_plus_best_runs = combinedRuns;
+          fetchedDungeonData.push(mainResult.data);
         }
-      
         setDungeonData(fetchedDungeonData);
-        setAlternateDungeonData(fetchedAlternateDungeonData);
       };
-      
-    
       fetchDungeonData();
     }, []);
 
-    
+    function sortDungeons(dungeonRuns) {
+      return dungeonRuns.sort((a, b) => {
+        const aIndex = dungeonOrder.indexOf(dungeonAbbreviations[a.dungeon]);
+        const bIndex = dungeonOrder.indexOf(dungeonAbbreviations[b.dungeon]);
+        return aIndex - bIndex;
+      });
+    }
+
     function filterDungeonsByType(dungeonRuns, type) {
       return dungeonRuns.filter((run) =>
         run.affixes.some((affix) => affix.name === type)
@@ -59,12 +64,12 @@ const DungeonBreakdown = () => {
       };
 
       return (
-        <div>
+        <div className="dungeon-breakdown-container">
           <h2 className="dungeon-breakdown-title">Dungeon Breakdown</h2>
           <div className="dungeon-breakdown-grid">
             {dungeonData.map((data, index) => {
-              const tyrannicalRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical');
-              const fortifiedRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified');
+               const tyrannicalRuns = sortDungeons(filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical'));
+               const fortifiedRuns = sortDungeons(filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified'));
       
               return (
                 <div key={index} className="member-dungeons">
@@ -75,8 +80,8 @@ const DungeonBreakdown = () => {
                       <ul>
                         {tyrannicalRuns.map((run, i) => (
                           <div key={i} className="dungeon-info">
-                            <span className="dungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
-                            <span className="dungeon-level">+{run.mythic_level}:</span>
+                            <span className="tdungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
+                            <span className="tdungeon-level">+{run.mythic_level}</span>
                           </div>
                         ))}
                       </ul>
@@ -86,8 +91,8 @@ const DungeonBreakdown = () => {
                       <ul>
                         {fortifiedRuns.map((run, i) => (
                           <div key={i} className="dungeon-info">
-                            <span className="dungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
-                            <span className="dungeon-level">+{run.mythic_level}:</span>
+                            <span className="fdungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
+                            <span className="fdungeon-level">+{run.mythic_level}</span>
                           </div>
                         ))}
                       </ul>
@@ -99,10 +104,6 @@ const DungeonBreakdown = () => {
           </div>
         </div>
       );
-      
-      
-      
-
 
 };
 

@@ -1,5 +1,5 @@
 .member-role-icon {
-    width: 30px;
+    width: 32px;
     height: auto;
     margin-left: 10px; /* adjust the spacing between the text and the icon */
   }
@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 150px;
-    gap: 100px; /* Optional: Add some space between Member components */
+    gap: 50px; /* Optional: Add some space between Member components */
     background-color: #282a36;
 
   }
@@ -24,9 +24,10 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
-    padding: 100px;
-    margin: 20px;
-    background-color: rgb(17, 18, 22);
+    padding: 80px;
+    width: auto;
+    margin: 15px;
+    background-color: rgb(24, 25, 33);
     color: white;
     border-radius: 15px;
     transition-duration: 0.2s; 
