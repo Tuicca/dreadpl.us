@@ -27,6 +27,7 @@
     grid-gap: 10px;
     align-items: center;
     padding: 5px 0;
+    
   }
   
   .dungeon-name,
@@ -78,4 +79,8 @@
 
   .dungeon-breakdown-container {
     padding-bottom: 20px; /* Change this value according to your needs */
+  }
+
+  .highlight {
+    background-color: rgb(113, 145, 204);
   }

@@ -5,10 +5,21 @@ import teamMembers from '../teamMembers';
 
 const DungeonBreakdown = () => {
     const [dungeonData, setDungeonData] = useState([]);
-    const [alternateDungeonData, setAlternateDungeonData] = useState([]);
+    const [highlightedDungeon, setHighlightedDungeon] = useState(null);
+    const [highlightedColumnType, setHighlightedColumnType] = useState(null);
 
     const dungeonOrder = ['SBG', 'COS', 'TJS', 'HOV', 'AA', 'AV', 'RLP', 'NO'];
 
+    const handleMouseOver = (dungeonName, columnType) => {
+      setHighlightedDungeon(dungeonName);
+      setHighlightedColumnType(columnType);
+    };
+    
+    const handleMouseOut = () => {
+      setHighlightedDungeon(null);
+      setHighlightedColumnType(null);
+    };
+    
     useEffect(() => {
       const fetchDungeonData = async () => {
         const fetchedDungeonData = [];
@@ -40,9 +51,9 @@ const DungeonBreakdown = () => {
     }
 
     function filterDungeonsByType(dungeonRuns, type) {
-      return dungeonRuns.filter((run) =>
-        run.affixes.some((affix) => affix.name === type)
-      );
+      return dungeonRuns
+        .filter((run) => run.affixes.some((affix) => affix.name === type))
+        .map((run) => ({ ...run, columnType: type }));
     }
 
       function formatTime(ms){
@@ -79,7 +90,14 @@ const DungeonBreakdown = () => {
                       <h3>Tyrannical</h3>
                       <ul>
                         {tyrannicalRuns.map((run, i) => (
-                          <div key={i} className="dungeon-info">
+                          <div key={i} className={`dungeon-info ${
+                            run.dungeon === highlightedDungeon &&
+                            run.columnType === highlightedColumnType
+                              ? 'highlight'
+                              : ''
+                          }`}
+                          onMouseOver={() => handleMouseOver(run.dungeon, run.columnType)}
+                          onMouseOut={handleMouseOut}>
                             <span className="tdungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
                             <span className="tdungeon-level">+{run.mythic_level}</span>
                           </div>
@@ -90,7 +108,14 @@ const DungeonBreakdown = () => {
                       <h3>Fortified</h3>
                       <ul>
                         {fortifiedRuns.map((run, i) => (
-                          <div key={i} className="dungeon-info">
+                          <div key={i} className={`dungeon-info ${
+                            run.dungeon === highlightedDungeon &&
+                            run.columnType === highlightedColumnType
+                              ? 'highlight'
+                              : ''
+                          }`}
+                          onMouseOver={() => handleMouseOver(run.dungeon, run.columnType)}
+                          onMouseOut={handleMouseOut}>
                             <span className="fdungeon-name">{dungeonAbbreviations[run.dungeon]}</span>
                             <span className="fdungeon-level">+{run.mythic_level}</span>
                           </div>
