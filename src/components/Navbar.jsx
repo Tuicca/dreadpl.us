@@ -32,6 +32,7 @@ const Navbar = (props) => {
   return (
     <nav className="navbar">
            <div className="nav-logo">Dread+</div>
+
       <form className="search-form" onSubmit={handleSubmit}>
       <label htmlFor="searchCategory" className="search-label">Realm:</label>
         <select value={searchCategory} onChange={handleCategoryChange} className="search-select">
@@ -49,7 +50,6 @@ const Navbar = (props) => {
         <input type="text" value={searchText} onChange={handleSearchChange} className="search-input" placeholder="Character Name" />
         <button type="submit" className="search-btn">Search Character</button>
       </form>
-
 
       <ul className="nav-links">
         <li className="nav-item"><a href="/about">About</a></li>

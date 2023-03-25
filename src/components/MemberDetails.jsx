@@ -2,7 +2,7 @@ import React from 'react';
 import './MemberDetails.css';
 import teamMembers from '../teamMembers';
 
-const MemberDetails = ({ character }) => {
+const MemberDetails = ({ character, dungeonData }) => {
   return (
     <div className="member-details">
       {/* Add the content you want to display in the dropdown */}

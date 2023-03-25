@@ -15,22 +15,29 @@ const getRoleIcon = (role) => {
   return roleIconMapping[role] || '';
 };
 
+const scoreColorMapping = {
+  '3450.0': '#ff8000',
+  '3290.0': '#f9753c',
+  '3170.0': '#f26b5b',
+  '3050.0': '#ea6078',
+  '2930.0': '#df5693',
+  '2810.0': '#d24cad',
+  '2690.0': '#c242c8',
+  '2570.0': '#ad38e3',
+  '2430.0': '#9544eb',
+  '2310.0': '#7c55e7',
+  '2190.0': '#5e62e3',
+  '2070.0': '#316cdf',
+  '1905.0': '#2d79d4',
+  '1785.0': '#4787c4',
+  '1665.0': '#5496b5',
+  '1545.0': '#5ca5a5',
+  '0.0': 'white',
+};
+
 const getScoreColor = (score) => {
-  if (score > 3000) {
-    return '#EF3131';
-  } else if (score > 2900) {
-    return '#EF6931';
-  } else if (score > 2800) {
-    return '#EF8531';
-  } else if (score > 2700) {
-    return '#ED5A74';
-  } else if (score > 2600) {
-    return '#DD3EEE';
-  } else if (score > 2400) {
-    return '#A06CD0';
-  } else {
-    return 'white';
-  }
+  const scoreRange = Object.keys(scoreColorMapping).find((range) => score > parseFloat(range));
+  return scoreRange ? scoreColorMapping[scoreRange] : 'white';
 };
 
 const Member = ({ character, onMemberClick }) => {
@@ -38,6 +45,7 @@ const Member = ({ character, onMemberClick }) => {
   const roleIcon = getRoleIcon(displayCharacter.active_spec_role);
 
   const score = displayCharacter.mythic_plus_scores_by_season[0].scores.all;
+  //console.log(typeof(score));
 
   const scoreStyle = {
     color: getScoreColor(score),
