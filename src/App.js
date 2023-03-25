@@ -14,23 +14,39 @@ import DungeonBreakdown from './components/DungeonBreakdown';
 function App() {
   const [characters, setCharacters] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
+  const [dungeonData, setDungeonData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
 
   useDocumentTitle('Dread Mythic Plus');
 
+  //Fetching Dungeon Data per Member TODO COMBINE
   useEffect(() => {
     const fetchteamMembers = async () => {
       const fetchedCharacters = [];
+      const fetchedDungeonData = [];
 
       for (const defaultCharacter of teamMembers) {
+        //Getting Team Members
         const result = await axios(
           `https://raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_scores_by_season%3Acurrent`
         );
-        console.log("API Response: ",result);
         fetchedCharacters.push(result.data);
+          //Best Dungeons Per Member
+        const mainResult = await axios(
+          `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_best_runs%3Aall`
+        );
+          //Alternate Best Dungeons Per Member
+        const altResult = await axios(
+          `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_alternate_runs%3Aall`
+        );  
+        //Big Concat before sorting
+        const combinedRuns = mainResult.data.mythic_plus_best_runs.concat(altResult.data.mythic_plus_alternate_runs);
+        mainResult.data.mythic_plus_best_runs = combinedRuns;
+        fetchedDungeonData.push(mainResult.data);
       }
       setCharacters(fetchedCharacters);
+      setDungeonData(fetchedDungeonData);
     };
     fetchteamMembers();
     setTimeout(() => {
@@ -78,7 +94,7 @@ function App() {
                 ))}
               </div>
               {selectedMember && (
-                <MemberDetails character={selectedMember} />
+                <MemberDetails dungeonData={dungeonData }character={selectedMember} />
               )}
               <Home />
               {/* Your other components and content */}
@@ -86,7 +102,7 @@ function App() {
           </div>
   
           <div className="dungeon-bd">
-            <DungeonBreakdown />
+            <DungeonBreakdown dungeonData={dungeonData}/>
           </div>
         </>
       )}
