@@ -6,16 +6,17 @@ const DungeonBreakdown = ({dungeonData}) => {
     const [highlightedDungeon, setHighlightedDungeon] = useState(null);
     const [highlightedColumnType, setHighlightedColumnType] = useState(null);
 
-    const handleMouseOver = (dungeonName, columnType) => {
+    const handleClick = (dungeonName, columnType) => {
       setHighlightedDungeon(dungeonName);
       setHighlightedColumnType(columnType);
     };
-    
+    /*
     const handleMouseOut = () => {
       setHighlightedDungeon(null);
       setHighlightedColumnType(null);
     };
-    
+    */
+
     function filterDungeonsByType(dungeonRuns, type) {
       return dungeonRuns
         .filter((run) => run.affixes.some((affix) => affix.name === type))
@@ -44,10 +45,9 @@ const DungeonBreakdown = ({dungeonData}) => {
                               ? 'highlight'
                               : ''
                           }`}
-                          onMouseOver={() => handleMouseOver(run.dungeon, run.columnType)}
-                          onMouseOut={handleMouseOut}>
-                            <span className="tdungeon-name">{run.short_name}</span>
-                            <span className="tdungeon-level">+{run.mythic_level}</span>
+                          onClick={() => handleClick(run.dungeon, run.columnType)}>
+                          <span className="tdungeon-name">{run.short_name}</span>
+                          <span className="tdungeon-level">+{run.mythic_level}</span>
                           </div>
                         ))}
                       </ul>
@@ -62,10 +62,9 @@ const DungeonBreakdown = ({dungeonData}) => {
                               ? 'highlight'
                               : ''
                           }`}
-                          onMouseOver={() => handleMouseOver(run.dungeon, run.columnType)}
-                          onMouseOut={handleMouseOut}>
-                            <span className="fdungeon-name">{run.short_name}</span>
-                            <span className="fdungeon-level">+{run.mythic_level}</span>
+                          onClick={() => handleClick(run.dungeon, run.columnType)}>
+                          <span className="fdungeon-name">{run.short_name}</span>
+                          <span className="fdungeon-level">+{run.mythic_level}</span>
                           </div>
                         ))}
                       </ul>

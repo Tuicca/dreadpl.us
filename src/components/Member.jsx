@@ -40,12 +40,12 @@ const getScoreColor = (score) => {
   return scoreRange ? scoreColorMapping[scoreRange] : 'white';
 };
 
-const Member = ({ character, onMemberClick }) => {
+//Member Component Starts Here!
+const Member = ({ character, onMemberClick, onRemoveMember }) => {
   const displayCharacter = character;
   const roleIcon = getRoleIcon(displayCharacter.active_spec_role);
 
   const score = displayCharacter.mythic_plus_scores_by_season[0].scores.all;
-  //console.log(typeof(score));
 
   const scoreStyle = {
     color: getScoreColor(score),
@@ -53,20 +53,25 @@ const Member = ({ character, onMemberClick }) => {
   };
 
   return (
-    <a href="#" className="member-link" onClick={() => onMemberClick(character)}>
 
-    <div className="member">
+    <div className="member" onClick={() => onMemberClick(character)}>
       <img src={displayCharacter.thumbnail_url} alt={`${displayCharacter.name} thumbnail`} className="member-image" />
       <h3 className="member-name">{displayCharacter.name}</h3>
       <img src={roleIcon} alt={displayCharacter.active_spec_role} className="member-role-icon" />
-      <p className="member-class-spec">
-        {displayCharacter.class} 
-      </p>
+      <p className="member-class-spec"> {displayCharacter.class}</p>
       <p className="member-spec"> {displayCharacter.active_spec_name}</p>
       <p className="member-score" style={scoreStyle}>{score}</p>
-    </div>
 
-    </a>
+      <button
+        className="remove-member-btn"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the onMemberClick event
+          e.preventDefault(); // Prevent default link behavior
+          onRemoveMember(character);
+        }}>Remove
+      </button>
+      
+    </div>
   );
 };
 

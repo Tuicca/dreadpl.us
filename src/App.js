@@ -9,7 +9,7 @@ import teamMembers from './teamMembers';
 import MemberDetails from './components/MemberDetails';
 import useDocumentTitle from './useDocumentTitle';
 import DungeonBreakdown from './components/DungeonBreakdown';
-
+import MythicPlusCalculator from './components/MythicPlusCalculator';
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -49,6 +49,7 @@ function App() {
       setDungeonData(fetchedDungeonData);
     };
     fetchteamMembers();
+
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -64,6 +65,12 @@ function App() {
 
   const handleCharacterSearch = (newCharacter) => {
     setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
+  };
+
+  const handleRemoveMember = (characterToRemove) => {
+    setCharacters((prevCharacters) =>
+      prevCharacters.filter((character) => character.id !== characterToRemove.id)
+    );
   };
 
   return (
@@ -90,6 +97,7 @@ function App() {
                     key={index}
                     character={character}
                     onMemberClick={handleMemberClick}
+                    onRemoveMember={() => handleRemoveMember(character)}
                   />
                 ))}
               </div>
@@ -104,6 +112,10 @@ function App() {
           <div className="dungeon-bd">
             <DungeonBreakdown dungeonData={dungeonData}/>
           </div>
+          <main>
+        <MythicPlusCalculator />
+        {/* ...any other components or elements you have in the main content... */}
+      </main>
         </>
       )}
     </div>
