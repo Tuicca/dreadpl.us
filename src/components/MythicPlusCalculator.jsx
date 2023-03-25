@@ -1,64 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./MythicPlusCalculator.css";
 
 const MythicPlusCalculator = () => {
-  const [keyLevel1, setKeyLevel1] = useState('');
-  const [keyLevel2, setKeyLevel2] = useState('');
-  const [underPercentage1, setUnderPercentage1] = useState('');
-  const [underPercentage2, setUnderPercentage2] = useState('');
-  const [result, setResult] = useState('');
+  const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
 
-  const calculateMythicPlusScore = () => {
-    const bestKey = Math.max(keyLevel1, keyLevel2);
-    const altKey = Math.min(keyLevel1, keyLevel2);
-    const upBestKey = bestKey === keyLevel1 ? underPercentage1 : underPercentage2;
-    const upAltKey = bestKey === keyLevel1 ? underPercentage2 : underPercentage1;
+  const dungeons = [
+    "SBG",
+    "COS",
+    "TJS",
+    "HOV",
+    "AA",
+    "AV",
+    "NO",
+    "RLP",
+  ];
 
-    const bestKeyScore = ((100 + (bestKey - 10) * 7) + 5 * Math.min((upBestKey / 0.4), 1)) * 1.5;
-    const altKeyScore = ((100 + (altKey - 10) * 7) + 5 * Math.min((upAltKey / 0.4), 1)) * 0.5;
+  const handleInputChange = (index, value) => {
+    const newKeyLevels = [...keyLevels];
+    newKeyLevels[index] = value;
+    setKeyLevels(newKeyLevels);
+  };
 
-    setResult(bestKeyScore + altKeyScore);
+  const renderInputPairs = () => {
+    const pairs = [];
+
+    for (let i = 0; i < 8; i++) {
+      pairs.push(
+        <div key={i} className="input-pair">
+          <label htmlFor={`input-${i}`}>{dungeons[i]}</label>
+          <input
+            id={`input-${i}`}
+            type="number"
+            value={keyLevels[i]}
+            onChange={(e) => handleInputChange(i, e.target.value)}
+            className="small-input"
+          />
+          <input
+            id={`input-${i + 8}`}
+            type="number"
+            value={keyLevels[i + 8]}
+            onChange={(e) => handleInputChange(i + 8, e.target.value)}
+            className="small-input"
+          />
+          <div className="sum-display">
+            = {calculateMPS(keyLevels[i], keyLevels[i + 8])}
+          </div>
+        </div>
+      );
+    }
+
+    return pairs;
+  };
+
+  const calculateMPS = (keyLevel1, keyLevel2) => {
+    if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
+      return "";
+    }
+  
+    const UP = 5 * Math.min(0.05 / 0.4, 1);
+    const higherKey = Math.max(keyLevel1, keyLevel2);
+    const lowerKey = Math.min(keyLevel1, keyLevel2);
+    const bestKey = ((100 + (higherKey - 10) * 7) + UP) * 1.5;
+    const alternateKey = ((100 + (lowerKey - 10) * 7) + UP) * 0.5;
+    return (bestKey + alternateKey).toFixed(2);
+  };
+  
+  const calculateTotalMPS = () => {
+    let total = 0;
+    for (let i = 0; i < 8; i++) {
+      total += parseFloat(calculateMPS(keyLevels[i], keyLevels[i + 8]));
+    }
+    return total.toFixed(2);
   };
 
   return (
-    <div>
-      <h2>Mythic Plus Score Calculator</h2>
-      <div>
-        <label>Key Level 1: </label>
-        <input
-          type="number"
-          value={keyLevel1}
-          onChange={(e) => setKeyLevel1(Number(e.target.value))}
-        />
+    <div className="mythic-plus-calculator">
+      <h2>Mythic Plus Calculator</h2>
+      <div className="calculator-grid">
+        <div className="column-header">Tyrannical</div>
+        <div className="column-header">Fortified</div>
       </div>
+      {renderInputPairs()}
       <div>
-        <label>Key Level 2: </label>
-        <input
-          type="number"
-          value={keyLevel2}
-          onChange={(e) => setKeyLevel2(Number(e.target.value))}
-        />
-      </div>
-      <div>
-        <label>Under Percentage 1: </label>
-        <input
-          type="number"
-          step="0.01"
-          value={underPercentage1}
-          onChange={(e) => setUnderPercentage1(Number(e.target.value))}
-        />
-      </div>
-      <div>
-        <label>Under Percentage 2: </label>
-        <input
-          type="number"
-          step="0.01"
-          value={underPercentage2}
-          onChange={(e) => setUnderPercentage2(Number(e.target.value))}
-        />
-      </div>
-      <button onClick={calculateMythicPlusScore}>Calculate</button>
-      <div>
-        <p>Mythic Plus Score: {result}</p>
+        <h3>Total Mythic Plus Score: {calculateTotalMPS()}</h3>
       </div>
     </div>
   );
