@@ -10,12 +10,7 @@ const DungeonBreakdown = ({dungeonData}) => {
       setHighlightedDungeon(dungeonName);
       setHighlightedColumnType(columnType);
     };
-    /*
-    const handleMouseOut = () => {
-      setHighlightedDungeon(null);
-      setHighlightedColumnType(null);
-    };
-    */
+
 
     function filterDungeonsByType(dungeonRuns, type) {
       return dungeonRuns
@@ -30,10 +25,11 @@ const DungeonBreakdown = ({dungeonData}) => {
             {dungeonData.map((data, index) => {
                const tyrannicalRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical');
                const fortifiedRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified');
+               //console.log("data DB Breakdown: ",data);
       
               return (
                 <div key={index} className="member-dungeons">
-                  <div className="member-name">{data.name}</div>
+                  <div className="member-name">{data.character.name}</div>
                   <div className="run-types">
                     <div className="tyrannical-runs">
                       <h3>Tyrannical</h3>

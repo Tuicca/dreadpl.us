@@ -3,6 +3,7 @@ import "./MythicPlusCalculator.css";
 
 const MythicPlusCalculator = () => {
   const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
+  const [error, setError] = useState("");
 
   const dungeons = [
     "SBG",
@@ -16,6 +17,11 @@ const MythicPlusCalculator = () => {
   ];
 
   const handleInputChange = (index, value) => {
+    if (value > 35) {
+      setError("Key level should not be higher than 35.");
+    } else {
+      setError("");
+    }
     const newKeyLevels = [...keyLevels];
     newKeyLevels[index] = value;
     setKeyLevels(newKeyLevels);
@@ -56,6 +62,9 @@ const MythicPlusCalculator = () => {
     if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
       return "";
     }
+    if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
+      return "";
+    }
   
     const UP = 5 * Math.min(0.05 / 0.4, 1);
     const higherKey = Math.max(keyLevel1, keyLevel2);
@@ -77,12 +86,13 @@ const MythicPlusCalculator = () => {
     <div className="mythic-plus-calculator">
       <h2>Mythic Plus Calculator</h2>
       <div className="calculator-grid">
-        <div className="column-header">Tyrannical</div>
-        <div className="column-header">Fortified</div>
+        <div className="tcolumn-header">Tyrannical</div>
+        <div className="fcolumn-header">Fortified</div>
       </div>
       {renderInputPairs()}
+      {error && <p className="error-message">{error}</p>}
       <div>
-        <h3>Total Mythic Plus Score: {calculateTotalMPS()}</h3>
+        <h3>Approximate Mythic Plus Score: {calculateTotalMPS()}</h3>
       </div>
     </div>
   );
