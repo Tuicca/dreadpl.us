@@ -21,58 +21,71 @@ function App() {
   useDocumentTitle('Dread Mythic Plus');
 
   //Fetching Dungeon Data per Member TODO COMBINE
-  useEffect(() => {
-    const fetchteamMembers = async () => {
-      const fetchedCharacters = [];
-      const fetchedDungeonData = [];
+useEffect(() => {
+  const fetchteamMembers = async () => {
+    const fetchedCharacters = [];
+    const fetchedDungeonData = [];
 
-      for (const defaultCharacter of teamMembers) {
-        //Getting Team Members
-        const result = await axios(
-          `https://raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_scores_by_season%3Acurrent`
-        );
-        fetchedCharacters.push(result.data);
-          //Best Dungeons Per Member
-        const mainResult = await axios(
-          `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_best_runs%3Aall`
-        );
-          //Alternate Best Dungeons Per Member
-        const altResult = await axios(
-          `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_alternate_runs%3Aall`
-        );  
-        //Big Concat before sorting
-        const combinedRuns = mainResult.data.mythic_plus_best_runs.concat(altResult.data.mythic_plus_alternate_runs);
-        mainResult.data.mythic_plus_best_runs = combinedRuns;
-        fetchedDungeonData.push(mainResult.data);
-      }
-      setCharacters(fetchedCharacters);
-      setDungeonData(fetchedDungeonData);
-    };
-    fetchteamMembers();
+    for (const defaultCharacter of teamMembers) {
+      //Getting Team Members
+      const result = await axios(
+        `https://raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_scores_by_season%3Acurrent`
+      );
+      fetchedCharacters.push(result.data);
+      //Best Dungeons Per Member
+      const mainResult = await axios(
+        `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_best_runs%3Aall`
+      );
+      //Alternate Best Dungeons Per Member
+      const altResult = await axios(
+        `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_alternate_runs%3Aall`
+      );  
+      //Big Concat before sorting
+      const combinedRuns = mainResult.data.mythic_plus_best_runs.concat(altResult.data.mythic_plus_alternate_runs);
+      mainResult.data.mythic_plus_best_runs = combinedRuns;
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+      //console.log("mainresult:",mainResult);
 
-  const handleMemberClick = (character) => {
-    if(selectedMember && character.id === selectedMember.id){
-      setSelectedMember(null);
-    } else {
-      setSelectedMember(character);
+      const combinedData = {
+        character: mainResult.data, // Add this line to store the character object
+        mythic_plus_best_runs: mainResult.data.mythic_plus_best_runs,
+        mythic_plus_alternate_runs: altResult.data.mythic_plus_alternate_runs, // Add this line to store the alternate runs
+      };
+      console.log("combinedData:",combinedData);
+
+      fetchedDungeonData.push(combinedData);
     }
+
+    setCharacters(fetchedCharacters);
+    setDungeonData(fetchedDungeonData);
   };
+  fetchteamMembers();
+
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 2000);
+}, []);
+
+
+const handleMemberClick = (name, realm) => {
+  if (selectedMember && name === selectedMember.name && realm === selectedMember.realm) {
+    setSelectedMember(null);
+  } else {
+    setSelectedMember({ name, realm });
+  }
+};
 
   const handleCharacterSearch = (newCharacter) => {
     setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
   };
 
-  const handleRemoveMember = (characterToRemove) => {
-    setCharacters((prevCharacters) =>
-      prevCharacters.filter((character) => character.id !== characterToRemove.id)
-    );
+  const handleRemoveMember = (idToRemove) => {
+    const prevCharacters = characters.filter((_, index) => index !== idToRemove);
+    setCharacters(prevCharacters);
   };
 
+  //render
+  console.log('App.js dungeonData:', dungeonData);
   return (
     <div className="page-container">
       {isLoading ? (
@@ -92,25 +105,30 @@ function App() {
             <Navbar onCharacterSearch={handleCharacterSearch} />
             <div className="content">
               <div className="members-container">
-                {characters.map((character, index) => (
-                  <Member
-                    key={index}
-                    character={character}
-                    onMemberClick={handleMemberClick}
-                    onRemoveMember={() => handleRemoveMember(character)}
-                  />
-                ))}
+              {characters.map((character, index) => (
+  <Member
+    key={index}
+    id={index}
+    character={character}
+    onMemberClick={() => handleMemberClick(character.name, character.realm)}
+    onRemoveMember={handleRemoveMember}
+  />
+))}
               </div>
+            
               {selectedMember && (
-                <MemberDetails dungeonData={dungeonData }character={selectedMember} />
+                <MemberDetails
+                  dungeonData={dungeonData} 
+                  character={selectedMember}
+                />
               )}
-              <Home />
-              {/* Your other components and content */}
+            
             </div>
           </div>
   
           <div className="dungeon-bd">
-            <DungeonBreakdown dungeonData={dungeonData}/>
+            <DungeonBreakdown 
+            dungeonData={dungeonData}/>
           </div>
           <main>
         <MythicPlusCalculator />

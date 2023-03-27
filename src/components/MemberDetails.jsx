@@ -19,10 +19,12 @@ const calculateMPS = (keyLevel1, keyLevel2) => {
   const lowerKey = Math.min(keyLevel1, keyLevel2);
 
   const bestKey = ((100 + (higherKey - 10) * 7) + UP) * 1.5;
-  console.log("Show me the Best Key", higherKey," ", bestKey);
+  //console.log("Higher Key", higherKey,"-> ", bestKey);
 
   const alternateKey = ((100 + (lowerKey - 10) * 7) + UP) * 0.5;
-  console.log("Show me the Alt Key", lowerKey," ",alternateKey);
+  //console.log("Lower Key", lowerKey,"->",alternateKey);
+  
+  //console.log("Combined Score= ",bestKey + alternateKey);
 
   return (bestKey + alternateKey).toFixed(2);
 };
@@ -52,7 +54,7 @@ const findLowestAlternateHighestBest = (dungeonData, character) => {
 };
 
 
-
+//This returns "highestBestSameDungeon" which is the highest score you have for the same dungeon as your LOWEST KEY LEVEL.
 const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
   if (!character || !character.name || !character.realm) {
     console.log("findHighestKeyForDungeon character is null or missing required props");
@@ -73,7 +75,6 @@ const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
   const highestBestSameDungeon = characterData.mythic_plus_best_runs.find(
     (run) => run.short_name === dungeon
   );
-
   return highestBestSameDungeon;
 };
 
@@ -85,34 +86,32 @@ const MemberDetails = ({ dungeonData, character }) => {
     character
   );
 
-  //lowestAlternate will always show lowest 1 of 16 keys
-  //highestBest will always show highest 1 of 16 keys
-  //lowestAlternateBestKey needs to be tracked once we've identified the lowestAlternateKey.
-
   const highestBestSameDungeon = findHighestKeyForDungeon(
     dungeonData,
     character,
     lowestAlternate.short_name
   );
 
-
-
-  
   //Calculate Score Table Here
   const calculateScoreTable = (lowestAlternate, highestBestSameDungeon, highestBest) => {
 
-    const tableRowSize = highestBest.mythic_level - lowestAlternate.mythic_level;
+    const tableRowSize = highestBest.mythic_level - lowestAlternate.mythic_level; 
     const scoreTable = [];
     
 
     for (let i = 1; i <= tableRowSize; i++) {
       const newLowestAlternateLevel = lowestAlternate.mythic_level + i;
       const newScore = calculateMPS(highestBestSameDungeon.mythic_level, newLowestAlternateLevel);
-      scoreTable.push({ increment: i, newLowestAlternateLevel, newScore });
+      
+      const differenceInScore = (newScore - ((lowestAlternate.score*0.5) + (highestBestSameDungeon.score*1.5))).toFixed(2);
+      scoreTable.push({ increment: i, newLowestAlternateLevel, differenceInScore});
+
     }
+
 
     return scoreTable;
   };
+
 
   
 
@@ -120,16 +119,16 @@ const MemberDetails = ({ dungeonData, character }) => {
   // I need to add the total "Rating" value for both highestBest Key-of-same-dungeon and lowestAlternate Key-of-same-dungeon
   //const highestBest + alternateOfHighestBest
   //const lowestAlternate + highestBestOfLowestAlternate
-  
+
   return (
     <div className="member-details">
       <h2>{character.name}</h2>
       {highestBest && (
-        <p className="best-key">Best Key: {highestBest.short_name} +{highestBest.mythic_level} → {highestBest.score} points</p>
+        <p className="best-key">Best Key: {highestBest.short_name} + {highestBest.mythic_level}</p>
       )}
 
       {lowestAlternate && (
-        <p className="lowest-key">Lowest Key: {lowestAlternate.short_name} +{lowestAlternate.mythic_level} → {lowestAlternate.score} points</p>
+        <p className="lowest-key">Lowest Key: {lowestAlternate.short_name} +{lowestAlternate.mythic_level}</p>
       )}
       
       {newScore && (
@@ -138,14 +137,14 @@ const MemberDetails = ({ dungeonData, character }) => {
 
     {/* Score table rendering */}
     <div className="score-table">
-      <h3>Score Table</h3>
+      <h3>Lowest Key Improvements</h3>
       {scoreTable.map((row, index) => (
         <div key={index}>
-          <span>+{row.increment}:</span>
+          <span>+{row.increment}: </span>
           <span>
-            {lowestAlternate.short_name} +{row.newLowestAlternateLevel} →
+            {lowestAlternate.short_name} +{row.newLowestAlternateLevel} →      
           </span>
-          <span>{row.newScore} points</span>
+          <span> +{row.differenceInScore} points</span>
         </div>
       ))}
     </div>
