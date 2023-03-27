@@ -124,30 +124,33 @@ const MemberDetails = ({ dungeonData, character }) => {
     <div className="member-details">
       <h2>{character.name}</h2>
       {highestBest && (
-        <p className="best-key">Best Key: {highestBest.short_name} + {highestBest.mythic_level}</p>
+        <p className="best-key">Best Key: {highestBest.short_name}   +{highestBest.mythic_level}</p>
       )}
 
       {lowestAlternate && (
         <p className="lowest-key">Lowest Key: {lowestAlternate.short_name} +{lowestAlternate.mythic_level}</p>
       )}
       
-      {newScore && (
-        <p>New Score (if Alternate Key was at the same level as the Best Key): {newScore}</p>
-      )}
+      
+        <p>If your lowest key was at the same level as your best key</p>
+      
 
     {/* Score table rendering */}
     <div className="score-table">
-      <h3>Lowest Key Improvements</h3>
-      {scoreTable.map((row, index) => (
-        <div key={index}>
-          <span>+{row.increment}: </span>
-          <span>
-            {lowestAlternate.short_name} +{row.newLowestAlternateLevel} →      
-          </span>
-          <span> +{row.differenceInScore} points</span>
-        </div>
-      ))}
+  <h3>Lowest Key Improvements</h3>
+  <div className="score-table-header">
+    <span>Dungeon</span>
+    <span>Score Improvement</span>
+  </div>
+  {scoreTable.map((row, index) => (
+    <div key={index} className="score-table-row">
+      <span>
+        {lowestAlternate.short_name} +{row.newLowestAlternateLevel}
+      </span>
+      <span>+{row.differenceInScore} points</span>
     </div>
+  ))}
+</div>
   </div>
 );
 };
