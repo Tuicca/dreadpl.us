@@ -17,7 +17,7 @@
   
   .mythic-plus-calculator h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
   
   .calculator-grid {
@@ -52,8 +52,8 @@
   
   .input-pair label {
     font-size: 1rem;
-    width: 50px; /* Add this line */
-    text-align: right; /* Add this line */
+    width: 50px;
+    text-align: right;
   }
 
   .small-input {

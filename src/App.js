@@ -10,61 +10,52 @@ import MemberDetails from './components/MemberDetails';
 import useDocumentTitle from './useDocumentTitle';
 import DungeonBreakdown from './components/DungeonBreakdown';
 import MythicPlusCalculator from './components/MythicPlusCalculator';
+import About from './components/About';
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
   const [dungeonData, setDungeonData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
 
 
   useDocumentTitle('Dread Mythic Plus');
 
   //Fetching Dungeon Data per Member TODO COMBINE
-useEffect(() => {
-  const fetchteamMembers = async () => {
-    const fetchedCharacters = [];
-    const fetchedDungeonData = [];
-
-    for (const defaultCharacter of teamMembers) {
-      //Getting Team Members
-      const result = await axios(
-        `https://raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_scores_by_season%3Acurrent`
-      );
-      fetchedCharacters.push(result.data);
-      //Best Dungeons Per Member
-      const mainResult = await axios(
-        `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_best_runs%3Aall`
-      );
-      //Alternate Best Dungeons Per Member
-      const altResult = await axios(
-        `https:raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_alternate_runs%3Aall`
-      );  
-      //Big Concat before sorting
-      const combinedRuns = mainResult.data.mythic_plus_best_runs.concat(altResult.data.mythic_plus_alternate_runs);
-      mainResult.data.mythic_plus_best_runs = combinedRuns;
-
-      //console.log("mainresult:",mainResult);
-
-      const combinedData = {
-        character: mainResult.data, // Add this line to store the character object
-        mythic_plus_best_runs: mainResult.data.mythic_plus_best_runs,
-        mythic_plus_alternate_runs: altResult.data.mythic_plus_alternate_runs, // Add this line to store the alternate runs
-      };
-      console.log("combinedData:",combinedData);
-
-      fetchedDungeonData.push(combinedData);
-    }
-
-    setCharacters(fetchedCharacters);
-    setDungeonData(fetchedDungeonData);
-  };
-  fetchteamMembers();
-
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
-}, []);
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const promises = teamMembers.map(async (defaultCharacter) => {
+          const result = await axios(
+            `https://raider.io/api/v1/characters/profile?region=us&realm=${defaultCharacter.server}&name=${defaultCharacter.name}&fields=mythic_plus_scores_by_season%3Acurrent%2Cmythic_plus_best_runs%3Aall%2Cmythic_plus_alternate_runs%3Aall`
+          );
+  
+          const combinedData = {
+            character: result.data,
+            mythic_plus_best_runs: result.data.mythic_plus_best_runs,
+            mythic_plus_alternate_runs: result.data.mythic_plus_alternate_runs,
+          };
+  
+          return combinedData;
+        });
+  
+        const results = await Promise.all(promises);
+        // Process the results and update the state here
+        setCharacters(results.map(result => result.character));
+        setDungeonData(results);
+  
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      }
+    };
+  
+    fetchTeamMembers();
+  
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
 
 
 const handleMemberClick = (name, realm) => {
@@ -106,14 +97,14 @@ const handleMemberClick = (name, realm) => {
             <div className="content">
               <div className="members-container">
               {characters.map((character, index) => (
-  <Member
-    key={index}
-    id={index}
-    character={character}
-    onMemberClick={() => handleMemberClick(character.name, character.realm)}
-    onRemoveMember={handleRemoveMember}
-  />
-))}
+              <Member
+                key={`${character.name}-${character.realm}`}
+                id={index}
+                character={character}
+                onMemberClick={() => handleMemberClick(character.name, character.realm)}
+                onRemoveMember={handleRemoveMember}
+              />
+              ))}
               </div>
             
               {selectedMember && (
@@ -122,18 +113,18 @@ const handleMemberClick = (name, realm) => {
                   character={selectedMember}
                 />
               )}
-            
             </div>
           </div>
-  
-          <div className="dungeon-bd">
-            <DungeonBreakdown 
-            dungeonData={dungeonData}/>
-          </div>
           <main>
-        <MythicPlusCalculator />
-        {/* ...any other components or elements you have in the main content... */}
-      </main>
+          <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
+          <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
+        {
+
+        }
+          </main>
+      <div className="about">
+        <About ></About>
+      </div>
         </>
       )}
     </div>

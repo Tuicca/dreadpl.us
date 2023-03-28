@@ -1,0 +1,16 @@
+.about-body{
+    color: white;
+    text-align: center;
+    padding-bottom: 100px;
+    padding-top: 2rem;
+}
+
+.about-body .about-header1{
+    color: inherit;
+    text-decoration: underline;
+}
+
+.about-body .about-p1{
+    color: inherit;
+    font-size: 2rem;
+}

@@ -43,7 +43,7 @@ const Navbar = (props) => {
       </div>
      
 
-      {/*Links Start Here*/}
+      {}
       <ul className="nav-links">
         <li className="nav-item-mpc">
           <Link
@@ -59,7 +59,7 @@ const Navbar = (props) => {
         <li className="nav-item-about">
         <Link
             activeClass="active"
-            to=""
+            to="about"
             spy={true}
             smooth={true}
             offset={-70}
