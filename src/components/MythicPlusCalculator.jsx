@@ -44,13 +44,13 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
   const handleInputChange = (dungeon, index, value) => {
     if (value > 35) {
       setError("You wish");
+      return;
     } else if( value < 0) {
       setError("Key level will never be lower than 0, no matter how bad you are");
       return;
     }else{
         setError("");
     }
-     
     
     const newKeyLevels = { ...keyLevels };
     if (!newKeyLevels[dungeon]) {
