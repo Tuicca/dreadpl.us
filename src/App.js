@@ -72,7 +72,10 @@ const handleMemberClick = (name, realm) => {
 
   const handleRemoveMember = (idToRemove) => {
     const prevCharacters = characters.filter((_, index) => index !== idToRemove);
+    const prevDungeonData = dungeonData.filter((_, index) => index !== idToRemove);
+  
     setCharacters(prevCharacters);
+    setDungeonData(prevDungeonData);
   };
 
   //render
@@ -93,7 +96,7 @@ const handleMemberClick = (name, realm) => {
       ) : (
         <>
           <div className="App">
-            <Navbar onCharacterSearch={handleCharacterSearch} />
+            <Navbar />
             <div className="content">
               <div className="members-container">
               {characters.map((character, index) => (
@@ -118,9 +121,9 @@ const handleMemberClick = (name, realm) => {
           <main>
           <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
           <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
-        {
+        
 
-        }
+        
           </main>
       <div className="about">
         <About ></About>

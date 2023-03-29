@@ -3,7 +3,6 @@ import "./MythicPlusCalculator.css";
 
 const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
   const [error, setError] = useState("");
-  console.log("KEY LEVELS HERE!!",keyLevels);
 
   const dungeons = [
     "SBG",
