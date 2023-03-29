@@ -111,14 +111,11 @@ const handleMemberClick = (name, realm) => {
               </div>
             
               {selectedMember && (
-  <MemberDetails
-    dungeonData={dungeonData}
-    character={selectedMember}
-    selectedMember={selectedMember}
-    setSelectedMember={setSelectedMember}
-  />
-)}
-
+                <MemberDetails
+                  dungeonData={dungeonData} 
+                  character={selectedMember}
+                />
+              )}
             </div>
           </div>
           <main>

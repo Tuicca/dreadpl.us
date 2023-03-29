@@ -85,6 +85,11 @@ const MemberDetails = ({ dungeonData, character }) => {
     dungeonData,
     character
   );
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    setIsRendered(true);
+  }, [character]);
 
   const highestBestSameDungeon = findHighestKeyForDungeon(
     dungeonData,
@@ -121,7 +126,7 @@ const MemberDetails = ({ dungeonData, character }) => {
   //const lowestAlternate + highestBestOfLowestAlternate
 
   return (
-    <div className="member-details">
+    <div className={`member-details ${isRendered ? 'slide-down' : ''}`}>
       <h2>{character.name}</h2>
       {highestBest && (
         <p className="best-key">Best Key: {highestBest.short_name}   +{highestBest.mythic_level}</p>

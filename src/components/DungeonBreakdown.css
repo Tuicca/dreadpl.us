@@ -33,8 +33,8 @@
   .member-dungeons {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 5px; /* Add rounded corners */
+    border: 2px solid #ccc; /* Add a border */
+    /*border-radius: 5px; /* Add rounded corners */
     padding: 10px; /* Add some padding */
     width: 100%;
   }
