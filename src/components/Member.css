@@ -9,8 +9,10 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 150px;
+    padding-bottom: 120px;
     gap: 50px; /* Optional: Add some space between Member components */
     background-color: #282a36;
+    
 
   }
   .member-class-spec {
@@ -23,14 +25,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
-    padding: 80px;
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2);
+    padding: 85px;
     width: auto;
     margin: 15px;
     background-color: rgb(24, 25, 33);
     color: white;
     border-radius: 15px;
     transition-duration: 0.2s; 
+    border: 1px solid rgba(238, 228, 228, 0.116);
   }
 
   .member-image {

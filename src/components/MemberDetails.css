@@ -1,13 +1,23 @@
 .member-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 30px;
-    color: white;
-    background-color: #282a36;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 75px;
+  color: white;
+  background-color: #282a36;
+  transform: translateY(calc(-10%)); 
+  opacity: 0;
+  transition: transform 0.5s;
+  backface-visibility: hidden;
+}
+
+.member-details.slide-down {
+  transform: translateY(0);
+  background-color: #282a36;
+  backface-visibility: hidden;
+  opacity: 1;
+}
+
   .best-key {
     display: block;
     width: 7%;
@@ -68,4 +78,5 @@
     border-top: none;
     text-align: center; /* Add this line to center the text within each row */
   }
+  
   

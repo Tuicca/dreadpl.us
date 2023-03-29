@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
     margin-top: 20px;
+ 
   }
 
 
@@ -35,6 +36,7 @@
     border: 1px solid #ccc; /* Add a border */
     border-radius: 5px; /* Add rounded corners */
     padding: 10px; /* Add some padding */
+    width: 100%;
   }
   
   .member-name {
@@ -51,6 +53,7 @@
     grid-gap: 10px;
     align-items: center;
     padding: 5px 0;
+    
     
   }
   
