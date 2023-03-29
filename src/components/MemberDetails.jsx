@@ -81,27 +81,10 @@ const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
 
 //MemberDetail component starts here!!
 const MemberDetails = ({ dungeonData, character }) => {
-
-  const [isRendered, setIsRendered] = useState(false);
-  
   const { lowestAlternate, highestBest, newScore } = findLowestAlternateHighestBest(
     dungeonData,
     character
   );
-
-  
-  
-
-  useEffect(() => {
-    setIsRendered(true);
-  
-    return () => {
-      if (selectedMember && character.name === selectedMember.name && character.realm === selectedMember.realm) {
-        setSelectedMember(null);
-      }
-    };
-  }, [character, selectedMember, setSelectedMember]);
-  
 
   const highestBestSameDungeon = findHighestKeyForDungeon(
     dungeonData,
@@ -138,7 +121,7 @@ const MemberDetails = ({ dungeonData, character }) => {
   //const lowestAlternate + highestBestOfLowestAlternate
 
   return (
-    <div className={`member-details ${isRendered ? 'slide-down' : ''}`}>
+    <div className="member-details">
       <h2>{character.name}</h2>
       {highestBest && (
         <p className="best-key">Best Key: {highestBest.short_name}   +{highestBest.mythic_level}</p>
