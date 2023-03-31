@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-color: #282a36;
+}
+.affix-container {
+
+  background-color: #282a36;
 }
 
 .App-logo {
@@ -44,4 +49,8 @@
 .page-container{
   background-color: #282a36;
   min-height: 100vh;
+}
+
+.members-wrapper {
+  position: relative;
 }

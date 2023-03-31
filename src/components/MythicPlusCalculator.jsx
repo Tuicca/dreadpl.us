@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./MythicPlusCalculator.css";
 
-const MythicPlusCalculator = () => {
-  const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
+const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
   const [error, setError] = useState("");
 
   const dungeons = [
@@ -16,47 +15,74 @@ const MythicPlusCalculator = () => {
     "RLP",
   ];
 
-  const handleInputChange = (index, value) => {
+  const scoreColorMapping = {
+    '3450.0': '#ff8000',
+    '3290.0': '#f9753c',
+    '3170.0': '#f26b5b',
+    '3050.0': '#ea6078',
+    '2930.0': '#df5693',
+    '2810.0': '#d24cad',
+    '2690.0': '#c242c8',
+    '2570.0': '#ad38e3',
+    '2430.0': '#9544eb',
+    '2310.0': '#7c55e7',
+    '2190.0': '#5e62e3',
+    '2070.0': '#316cdf',
+    '1905.0': '#2d79d4',
+    '1785.0': '#4787c4',
+    '1665.0': '#5496b5',
+    '1545.0': '#5ca5a5',
+    '0.0': 'white',
+  };
+
+  const getScoreColor = (score) => {
+    const scoreRange = Object.keys(scoreColorMapping).find((range) => score > parseFloat(range));
+    return scoreRange ? scoreColorMapping[scoreRange] : 'white';
+  };
+
+  const handleInputChange = (dungeon, index, value) => {
     if (value > 35) {
-      setError("Key level should not be higher than 35.");
-    } else {
-      setError("");
+      setError("You wish");
+      return;
+    } else if( value < 0) {
+      setError("Key level will never be lower than 0, no matter how bad you are");
+      return;
+    }else{
+        setError("");
     }
-    const newKeyLevels = [...keyLevels];
-    newKeyLevels[index] = value;
+    
+    const newKeyLevels = { ...keyLevels };
+    if (!newKeyLevels[dungeon]) {
+      newKeyLevels[dungeon] = ['', ''];
+    }
+    newKeyLevels[dungeon][index] = value;
     setKeyLevels(newKeyLevels);
   };
 
   const renderInputPairs = () => {
-    const pairs = [];
-
-    for (let i = 0; i < 8; i++) {
-      pairs.push(
-        <div key={i} className="input-pair">
-          <label htmlFor={`input-${i}`}>{dungeons[i]}</label>
-          <input
-            id={`input-${i}`}
-            type="number"
-            value={keyLevels[i]}
-            onChange={(e) => handleInputChange(i, e.target.value)}
-            className="small-input"
-          />
-          <input
-            id={`input-${i + 8}`}
-            type="number"
-            value={keyLevels[i + 8]}
-            onChange={(e) => handleInputChange(i + 8, e.target.value)}
-            className="small-input"
-          />
-          <div className="sum-display">
-            = {calculateMPS(keyLevels[i], keyLevels[i + 8])}
-          </div>
+    return dungeons.map((dungeon, i) => (
+      <div key={i} className="input-pair">
+        <label htmlFor={`input-${i}`}>{dungeon}</label>
+        <input
+          id={`input-${i}`}
+          type="number"
+          value={keyLevels[dungeon] ? keyLevels[dungeon][0] : ''}
+          onChange={(e) => handleInputChange(dungeon, 0, e.target.value)}
+          className="small-input"
+        />
+        <input
+          id={`input-${i + 8}`}
+          type="number"
+          value={keyLevels[dungeon] ? keyLevels[dungeon][1] : ''}
+          onChange={(e) => handleInputChange(dungeon, 1, e.target.value)}
+          className="small-input"
+        />
+        <div className="sum-display">
+          = {calculateMPS(keyLevels[dungeon] ? keyLevels[dungeon][0] : '', keyLevels[dungeon] ? keyLevels[dungeon][1] : '')}
         </div>
-      );
-    }
-
-    return pairs;
-  };
+      </div>
+    ));
+  }
 
   const calculateMPS = (keyLevel1, keyLevel2) => {
     if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
@@ -76,15 +102,15 @@ const MythicPlusCalculator = () => {
   
   const calculateTotalMPS = () => {
     let total = 0;
-    for (let i = 0; i < 8; i++) {
-      total += parseFloat(calculateMPS(keyLevels[i], keyLevels[i + 8]));
+    for (const dungeon in keyLevels) {
+      total += parseFloat(calculateMPS(keyLevels[dungeon][0], keyLevels[dungeon][1]));
     }
-    return total.toFixed(2);
+    return isNaN(total.toFixed(2)) ? "Please Enter your Keys" : total.toFixed(2);
   };
 
   return (
     <div className="mythic-plus-calculator">
-      <h2>Mythic Plus Calculator</h2>
+      <h2><u>Mythic Plus Calculator</u></h2>
       <div className="calculator-grid">
         <div className="tcolumn-header">Tyrannical</div>
         <div className="fcolumn-header">Fortified</div>
@@ -92,7 +118,10 @@ const MythicPlusCalculator = () => {
       {renderInputPairs()}
       {error && <p className="error-message">{error}</p>}
       <div>
-        <h3>Approximate Mythic Plus Score: {calculateTotalMPS()}</h3>
+     
+        <h3 style={{ color: 'white' }}>Approximate Mythic Plus Score:
+        <span 
+          style={{ color: isNaN(calculateTotalMPS()) ? '#ed5b45' : getScoreColor(calculateTotalMPS()) }}> {calculateTotalMPS()}</span></h3>
       </div>
     </div>
   );

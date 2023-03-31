@@ -1,6 +1,82 @@
-.member-details{
-    padding-top: 20px;
-    padding-bottom: 30px;
-    color:white;
-    background-color: #282a36;
+.member-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 75px;
+  color: white;
+  background-color: #282a36;
+  transform: translateY(calc(-10%)); 
+  opacity: 0;
+  transition: transform 0.5s ease;
+  backface-visibility: hidden;
 }
+
+.member-details.slide-down {
+  transform: translateY(0);
+  background-color: #282a36;
+  backface-visibility: hidden;
+  opacity: 1;
+}
+
+  .best-key {
+    display: block;
+    width: 7%;
+    align-content: center;
+    padding: 10px 10px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    /* Add any styles you want for the best-key and lowest-key texts */
+  }
+
+  
+  .best-key:hover{
+    background-color: green;
+  }
+
+  .lowest-key {
+    display: block;
+    width: 7%;
+    padding: 10px 10px;
+    margin: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    /* Add any styles you want for the best-key and lowest-key texts */
+  }
+
+  .lowest-key:hover{
+    background-color: red;
+  }
+  
+  .score-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .score-table-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #282a36;
+    font-weight: bold;
+    color: white; /* Add this line for better readability */
+    text-align: center;
+  }
+  
+  .score-table-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+    text-align: center; /* Add this line to center the text within each row */
+  }
+  
+  

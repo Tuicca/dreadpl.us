@@ -1,16 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import './DungeonBreakdown.css';
 
-const DungeonBreakdown = ({dungeonData}) => {
+const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
 
     const [highlightedDungeon, setHighlightedDungeon] = useState(null);
     const [highlightedColumnType, setHighlightedColumnType] = useState(null);
+
+    const dungeons = [
+      "SBG",
+      "COS",
+      "TJS",
+      "HOV",
+      "AA",
+      "AV",
+      "NO",
+      "RLP",
+    ];
+
 
     const handleClick = (dungeonName, columnType) => {
       setHighlightedDungeon(dungeonName);
       setHighlightedColumnType(columnType);
     };
 
+
+    const handleLoadData = (data) => {
+      const tyrannicalBestRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical');
+      const fortifiedBestRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified');
+      const tyrannicalAlternateRuns = filterDungeonsByType(data.mythic_plus_alternate_runs, 'Tyrannical');
+      const fortifiedAlternateRuns = filterDungeonsByType(data.mythic_plus_alternate_runs, 'Fortified');
+      
+      const tyrannicalRuns = tyrannicalBestRuns.concat(tyrannicalAlternateRuns);
+      const fortifiedRuns = fortifiedBestRuns.concat(fortifiedAlternateRuns);
+    
+      const newKeyLevels = dungeons.reduce((acc, dungeon) => {
+        const tyrannicalRun = tyrannicalRuns.find(run => run.short_name === dungeon);
+        const fortifiedRun = fortifiedRuns.find(run => run.short_name === dungeon);
+        acc[dungeon] = [
+          tyrannicalRun ? tyrannicalRun.mythic_level : '',
+          fortifiedRun ? fortifiedRun.mythic_level : ''
+        ];
+        return acc;
+      }, {});
+    
+      setKeyLevels(newKeyLevels);
+    };
 
     function filterDungeonsByType(dungeonRuns, type) {
       return dungeonRuns
@@ -23,8 +57,9 @@ const DungeonBreakdown = ({dungeonData}) => {
           <h2 className="dungeon-breakdown-title">Dungeon Breakdown</h2>
           <div className="dungeon-breakdown-grid">
             {dungeonData.map((data, index) => {
-               const tyrannicalRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical');
-               const fortifiedRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified');
+               const allRuns = data.mythic_plus_best_runs.concat(data.mythic_plus_alternate_runs);
+               const tyrannicalRuns = filterDungeonsByType(allRuns, 'Tyrannical');
+               const fortifiedRuns = filterDungeonsByType(allRuns, 'Fortified');
                //console.log("data DB Breakdown: ",data);
       
               return (
@@ -44,6 +79,7 @@ const DungeonBreakdown = ({dungeonData}) => {
                           onClick={() => handleClick(run.dungeon, run.columnType)}>
                           <span className="tdungeon-name">{run.short_name}</span>
                           <span className="tdungeon-level">+{run.mythic_level}</span>
+                          
                           </div>
                         ))}
                       </ul>
@@ -65,6 +101,10 @@ const DungeonBreakdown = ({dungeonData}) => {
                         ))}
                       </ul>
                     </div>
+                  
+                  </div>
+                  <div className="button-container">
+                    <button onClick={() => handleLoadData(data)}>Load Calculator</button>
                   </div>
                 </div>
               );
