@@ -11,7 +11,7 @@ const calculateMPS = (keyLevel1, keyLevel2) => {
   }
 
   if(keyLevel1 === keyLevel2){
-    console.log("key levels are the same now");
+    //console.log("key levels are the same now");
   }
 
   const UP = 5 * Math.min(0.05 / 0.4, 1);
@@ -47,9 +47,9 @@ const findLowestAlternateHighestBest = (dungeonData, character) => {
   const highestBest = characterData.mythic_plus_best_runs.reduce((max, run) => run.score > max.score ? run : max);
 
   const newScore = calculateMPS(highestBest.level, lowestAlternate.level);
-  console.log("Lowest Alternate: ", { lowestAlternate });
-  console.log("Highest Best: ", { highestBest });
-  console.log("newScore: ", { newScore })
+  //console.log("Lowest Alternate: ", { lowestAlternate });
+  //console.log("Highest Best: ", { highestBest });
+  //console.log("newScore: ", { newScore })
   return { lowestAlternate, highestBest, newScore };
 };
 

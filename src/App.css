@@ -2,6 +2,10 @@
   text-align: center;
   background-color: #282a36;
 }
+.affix-container {
+
+  background-color: #282a36;
+}
 
 .App-logo {
   height: 40vmin;

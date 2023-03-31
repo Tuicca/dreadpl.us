@@ -11,6 +11,7 @@ import useDocumentTitle from './useDocumentTitle';
 import DungeonBreakdown from './components/DungeonBreakdown';
 import MythicPlusCalculator from './components/MythicPlusCalculator';
 import About from './components/About';
+import AffixBanner from './components/AffixBanner';
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   const [dungeonData, setDungeonData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
+  const [affixes, setAffixes] = useState([]);
 
 
   useDocumentTitle('Dread Mythic Plus');
@@ -50,7 +52,20 @@ function App() {
       }
     };
   
+    const fetchAffixes = async () => {
+      try {
+        const response = await axios.get('https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en');
+        setAffixes(response.data.title);
+        console.log("AFFIX RESPONSE: ",response);
+      } catch (error) {
+        console.error("Error fetching affixes:", error);
+      }
+    };
+  
+
     fetchTeamMembers();
+    fetchAffixes();
+    
   
     setTimeout(() => {
       setIsLoading(false);
@@ -98,6 +113,9 @@ const handleMemberClick = (name, realm) => {
           <div className="App">
             <Navbar />
             <div className="content">
+              <div className="affix-container">
+              <AffixBanner affixes={affixes} />
+              </div>
               <div className="members-container">
               {characters.map((character, index) => (
               <Member
