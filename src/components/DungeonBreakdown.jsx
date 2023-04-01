@@ -25,6 +25,7 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
 
 
     const handleLoadData = (data) => {
+      console.log("load data: ", data);
       const tyrannicalBestRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Tyrannical');
       const fortifiedBestRuns = filterDungeonsByType(data.mythic_plus_best_runs, 'Fortified');
       const tyrannicalAlternateRuns = filterDungeonsByType(data.mythic_plus_alternate_runs, 'Tyrannical');

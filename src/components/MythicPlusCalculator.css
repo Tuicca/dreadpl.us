@@ -1,102 +1,165 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    color: white;
-  }
-  
-  .mythic-plus-calculator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    padding: 1rem;
-    text-align: center; /* Add this line */
-  }
-  
-  .mythic-plus-calculator h2 {
-    font-size: 2rem;
-    margin-bottom: 3rem;
-  }
-  
-  .calculator-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4rem;
-    align-items: center;
-    justify-items: center;
-    margin-bottom: 1.5rem;
-    width: auto;
-  }
-  
-  .mythic-plus-calculator .tcolumn-header {
-    text-align: right;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: white;
+}
 
-  .mythic-plus-calculator .fcolumn-header {
-    text-align: left;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 100%;
-  }
-  
-  .input-pair {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    width: 30%;
-  }
-  
-  .input-pair label {
-    font-size: 1rem;
-    width: 50px;
-    text-align: right;
-    margin-right: 10px;
-  }
+.mythic-plus-calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
 
-  .small-input {
-    width: 60px;
-    padding: 0.5rem;
-    border: 2px solid #5262ff;
-    font-size: 1rem;
-    background-color: #fff;
-    border-radius: 15px;
-    text-align: center;
-  }
-  
-  .small-input:focus {
-    background-color:#B0C4DE;
-  }
+.mythic-plus-calculator h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
 
-  .sum-display {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-left: 10px;
-  }
-  
-  .label {
-    font-size: 1.1rem;
-    font-weight: bold;
-    width: 40px;
-    text-align: right;
-  }
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4rem;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 1.5rem;
+  width: auto;
+}
 
-  .total {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 20px;
-  }
+.mythic-plus-calculator .tcolumn-header,
+.mythic-plus-calculator .fcolumn-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.mythic-plus-calculator .tcolumn-header {
+  text-align: right;
+}
+
+.mythic-plus-calculator .fcolumn-header {
+  text-align: left;
+}
+
+.input-pair {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 30%;
+}
+
+.input-pair label {
+  font-size: 1rem;
+  width: 50px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.small-input {
+  width: 60px;
+  padding: 0.5rem;
+  border: 2px solid #5262ff;
+  font-size: 1rem;
+  background-color: #fff;
+  border-radius: 15px;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.small-input:focus {
+  background-color: #B0C4DE;
+}
+
+.sum-display {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-left: 10px;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 40px;
+  text-align: right;
+}
+
+.total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.dungeon-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.dungeon-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.dungeon-name {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+.tyrannical-column,
+.fortified-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
   
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
-  }
+}
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px; /* adjust this value according to your preference */
+  margin: 0 auto;
+}
+
+.info-column {
+  flex: 1;
+  padding-right: 2rem;
+  text-align: left;
+}
+
+.calculator-column {
+  flex: 1;
+}
+.toggle-button{
+  border-radius: 10px;
+  background-color: #696969;
+  cursor: pointer;
+  color: white;
+  border: none;
+  
+}
