@@ -38,7 +38,7 @@ function App() {
             mythic_plus_best_runs: result.data.mythic_plus_best_runs,
             mythic_plus_alternate_runs: result.data.mythic_plus_alternate_runs,
           };
-  
+          console.log("COMBINED RUNS AFTER API: ", combinedData);
           return combinedData;
         });
   
@@ -56,7 +56,7 @@ function App() {
       try {
         const response = await axios.get('https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en');
         setAffixes(response.data.title);
-        console.log("AFFIX RESPONSE: ",response);
+        //console.log("AFFIX RESPONSE: ",response);
       } catch (error) {
         console.error("Error fetching affixes:", error);
       }
@@ -138,7 +138,9 @@ const handleMemberClick = (name, realm) => {
           </div>
           <main>
           <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
+
           <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
+          {console.log("APP CALCULATOR PROPERTIES: ", keyLevels)}
         
 
         
