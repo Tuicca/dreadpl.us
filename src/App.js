@@ -12,6 +12,7 @@ import DungeonBreakdown from './components/DungeonBreakdown';
 import MythicPlusCalculator from './components/MythicPlusCalculator';
 import About from './components/About';
 import AffixBanner from './components/AffixBanner';
+import Footer from './components/Footer';
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -20,6 +21,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [keyLevels, setKeyLevels] = useState(Array(16).fill(""));
   const [affixes, setAffixes] = useState([]);
+  const [dbdVisible, setDBDVisible] = useState(false);
 
 
   useDocumentTitle('Dread Mythic Plus');
@@ -38,7 +40,7 @@ function App() {
             mythic_plus_best_runs: result.data.mythic_plus_best_runs,
             mythic_plus_alternate_runs: result.data.mythic_plus_alternate_runs,
           };
-          console.log("COMBINED RUNS AFTER API: ", combinedData);
+         
           return combinedData;
         });
   
@@ -76,9 +78,12 @@ function App() {
 const handleMemberClick = (name, realm) => {
   if (selectedMember && name === selectedMember.name && realm === selectedMember.realm) {
     setSelectedMember(null);
+    setDBDVisible(false);
   } else {
     setSelectedMember({ name, realm });
+    setDBDVisible(true);
   }
+  
 };
 
   const handleCharacterSearch = (newCharacter) => {
@@ -124,11 +129,12 @@ const handleMemberClick = (name, realm) => {
                 character={character}
                 onMemberClick={() => handleMemberClick(character.name, character.realm)}
                 onRemoveMember={handleRemoveMember}
+                hideRemoveBtn={dbdVisible}
               />
               ))}
               </div>
             
-              {selectedMember && (
+              {selectedMember && dbdVisible && (
                 <MemberDetails
                   dungeonData={dungeonData} 
                   character={selectedMember}
@@ -137,16 +143,15 @@ const handleMemberClick = (name, realm) => {
             </div>
           </div>
           <main>
-          <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
-
+           <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
           <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
-          {console.log("APP CALCULATOR PROPERTIES: ", keyLevels)}
-        
-
-        
+               
           </main>
       <div className="about">
         <About ></About>
+      </div>
+      <div className="footer">
+      <Footer />
       </div>
         </>
       )}

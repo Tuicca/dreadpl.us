@@ -27,6 +27,7 @@
     text-decoration: none;
     font-size: 1.1rem;
     transition: color 0.3s;
+    cursor: pointer;
   }
   
   .nav-item-mpc {
@@ -35,6 +36,7 @@
     text-decoration: none;
     font-size: 1.1rem;
     transition: color 0.3s;
+    cursor: pointer;
   }
 
   .nav-banner-container {

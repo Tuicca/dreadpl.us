@@ -41,7 +41,7 @@ const getScoreColor = (score) => {
 };
 
 //Member Component Starts Here!
-const Member = ({ id, character, onMemberClick, onRemoveMember }) => {
+const Member = ({ id, character, onMemberClick, onRemoveMember, hideRemoveBtn }) => {
   const displayCharacter = character;
   const roleIcon = getRoleIcon(displayCharacter.active_spec_role);
 
@@ -62,7 +62,8 @@ const Member = ({ id, character, onMemberClick, onRemoveMember }) => {
       <p className="member-class-spec"> {displayCharacter.class}</p>
       <p className="member-spec"> {displayCharacter.active_spec_name}</p>
       <p className="member-score" style={scoreStyle}>{score}</p>
-
+      
+      {!hideRemoveBtn && (
       <button
       className="remove-member-btn"
       onClick={(e) => {
@@ -71,9 +72,9 @@ const Member = ({ id, character, onMemberClick, onRemoveMember }) => {
         onRemoveMember(id);
       }}
     >
-      Remove
+      Hide
     </button>
-      
+      )}
     </div>
   );
 };

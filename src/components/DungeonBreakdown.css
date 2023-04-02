@@ -7,12 +7,12 @@
   }
 
 
-  .button-container {
+  .button-container-load {
     text-align: center;
     border-radius: 10px;
-
   }
-  .button-container button{
+
+  .button-container-load button{
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border-radius: 10px;
@@ -20,25 +20,37 @@
     background-color: #366f9e;
     border: none;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: .5rem;
     margin-bottom: 10px;
-    transition: background-color 0.3s;
-
+  
+    transition: 0.3s;
   }
-  .button-container button:hover{
+
+  .button-container-load button:hover{
     background-color: #1f4666;
+    cursor: pointer;
   }
 
   
   .member-dungeons {
     display: flex;
     flex-direction: column;
-    border: 2px solid #ccc; /* Add a border */
-    /*border-radius: 5px; /* Add rounded corners */
-    padding: 10px; /* Add some padding */
-    width: 100%;
+    align-items: center;
+    /*border: 3px solid #ccc;*/
+    border-radius: 25px; 
+    padding: 5px; 
+    width: 90%;
+    transition-duration: 0.1s;
+    background-color:rgba(23, 27, 29, 0.548);
   }
-  
+/*
+  .member-dungeons:hover {
+    background-color: rgba(23, 27, 29, 0.548);
+    -webkit-transform: scale(1.05);
+  }
+  */
+
+
   .member-name {
     font-size: 24px;
     font-weight: bold;
@@ -51,10 +63,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
-    align-items: center;
+    /*align-items: center;*/
     padding: 5px 0;
-    
-    
+    cursor: pointer;
+    transition: 0.2;
   }
   
   .dungeon-name,
@@ -62,7 +74,7 @@
   .tdungeon-name {
     color: white;
     text-align: center;
-    justify-self: center; /* Align horizontally */
+    justify-self: center; 
   }
   
   .dungeon-level,
@@ -70,7 +82,7 @@
   .tdungeon-level {
     color: white;
     text-align: center;
-    justify-self: center; /* Align horizontally */
+    justify-self: center; 
   }
   
   .dungeon-time {
@@ -78,11 +90,13 @@
   }
   
   .dungeon-breakdown-title {
+    font-size: 2rem;
     color: white;
     text-align: center;
     text-decoration: underline;
     padding: 15px;
     border-radius: 15px;
+    padding-bottom: 25px;
   }
   
   .run-types {
@@ -98,16 +112,17 @@
   .tyrannical-runs,
   .fortified-runs {
     color: white;
-    text-align: center; /* Align text horizontally */
+    text-align: center; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align children vertically */
+    align-items: center;
   }
 
   .dungeon-breakdown-container {
-    padding-bottom: 20px; /* Change this value according to your needs */
+    padding-bottom: 20px; 
   }
 
   .highlight {
-    background-color: rgb(88, 113, 160);
+    /*background-color: rgb(88, 113, 160);*/
+    background-color: rgb(158, 32, 32);
   }

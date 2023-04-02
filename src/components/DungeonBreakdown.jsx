@@ -104,7 +104,7 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
                     </div>
                   
                   </div>
-                  <div className="button-container">
+                  <div className="button-container-load">
                     <button onClick={() => handleLoadData(data)}>Load Calculator</button>
                   </div>
                 </div>

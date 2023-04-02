@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-scroll';
-import axios from 'axios';
+
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -35,7 +35,7 @@ const Navbar = (props) => {
             smooth={true}
             offset={-70}
             duration={500}
-            >About Us
+            >About
           </Link>
         </li>
       </ul>
