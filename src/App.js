@@ -3,7 +3,6 @@ import axios from 'axios';
 import './loadingScreen.css';
 import './App.css';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
 import Member from './components/Member';
 import teamMembers from './teamMembers';
 import MemberDetails from './components/MemberDetails';
@@ -85,10 +84,11 @@ const handleMemberClick = (name, realm) => {
   }
   
 };
-
+  /* I may want this for a future iteration... cookie storage and add/remove
   const handleCharacterSearch = (newCharacter) => {
     setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
   };
+  */
 
   const handleRemoveMember = (idToRemove) => {
     const prevCharacters = characters.filter((_, index) => index !== idToRemove);

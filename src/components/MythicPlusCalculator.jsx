@@ -162,7 +162,7 @@ const renderInputPairs = () => {
           <div className="dungeon-name">{dungeon}</div>
           <div className="tyrannical-column">
         <button className="toggle-button" onClick={() => handleToggleClick(dungeon, 0)}>
-        {getCustomText(underPercentageState[dungeon] && underPercentageState[dungeon][0] || 0.05)}
+        {getCustomText((underPercentageState[dungeon] && underPercentageState[dungeon][0]) || 0.05)}
         </button>
         <input
               id={`input-${i}`}
@@ -174,7 +174,7 @@ const renderInputPairs = () => {
           </div>
           <div className="fortified-column">
         <button className="toggle-button" onClick={() => handleToggleClick(dungeon, 1)}>
-        {getCustomText(underPercentageState[dungeon] && underPercentageState[dungeon][1] || 0.05)}
+        {getCustomText((underPercentageState[dungeon] && underPercentageState[dungeon][1]) || 0.05)}
         </button>
             <input
               id={`input-${i + 8}`}
