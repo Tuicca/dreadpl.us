@@ -81,7 +81,7 @@ const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
 
 //MemberDetail component starts here!!
 const MemberDetails = ({ dungeonData, character }) => {
-  const { lowestAlternate, highestBest, newScore } = findLowestAlternateHighestBest(
+  const { lowestAlternate, highestBest} = findLowestAlternateHighestBest(
     dungeonData,
     character
   );

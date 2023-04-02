@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './DungeonBreakdown.css';
 
 const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
