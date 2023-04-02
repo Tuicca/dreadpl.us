@@ -50,7 +50,7 @@
   .member:hover {
     cursor: pointer;
     background-color: rgb(13, 16, 17);
-    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
   }
 
   .remove-member-btn {
