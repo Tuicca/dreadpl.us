@@ -1,6 +1,6 @@
 {
-  "short_name": "DreadPlus",
-  "name": "Made for Dread Members",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,14 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "dkeyicon_16.png",
+      "src": "logo192.png",
       "type": "image/png",
-      "sizes": "16x16"
+      "sizes": "192x192"
     },
     {
-      "src": "dkeyicon_32.png",
+      "src": "logo512.png",
       "type": "image/png",
-      "sizes": "32x32"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
