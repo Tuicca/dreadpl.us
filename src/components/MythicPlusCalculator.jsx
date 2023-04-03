@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import "./MythicPlusCalculator.css";
 
 const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
@@ -53,8 +53,6 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
     const scoreRange = Object.keys(scoreColorMapping).find((range) => score > parseFloat(range));
     return scoreRange ? scoreColorMapping[scoreRange] : 'white';
   };
-
-  
 
   const handleInputChange = (dungeon, index, value) => {
     if (value > 35) {
@@ -150,28 +148,16 @@ const renderInputPairs = () => {
       <div className="header-row">
         <div className="dungeon-name"></div>
         <div className="tyrannical-column">
-          <label>Tyrannical&#8239;&#8239;&thinsp;&thinsp;&thinsp;&thinsp;&#8239;&#8239;</label>
+          <label>Fortified&#8239;&#8239;&thinsp;&thinsp;&thinsp;&thinsp;&#8239;&#8239;&#8239;</label>
         </div>
         <div className="fortified-column">
-          <label>Fortified</label>
+          <label>Tyrannical</label>
         </div>
         <div className="sum-display"></div>
       </div>
       {dungeons.map((dungeon, i) => (
         <div key={i} className="dungeon-row">
           <div className="dungeon-name">{dungeon}</div>
-          <div className="tyrannical-column">
-        <button className="toggle-button" onClick={() => handleToggleClick(dungeon, 0)}>
-        {getCustomText((underPercentageState[dungeon] && underPercentageState[dungeon][0]) || 0.05)}
-        </button>
-        <input
-              id={`input-${i}`}
-              type="number"
-              value={keyLevels[dungeon] ? keyLevels[dungeon][0] : ''}
-              onChange={(e) => handleInputChange(dungeon, 0, e.target.value)}
-              className="small-input"
-            />
-          </div>
           <div className="fortified-column">
         <button className="toggle-button" onClick={() => handleToggleClick(dungeon, 1)}>
         {getCustomText((underPercentageState[dungeon] && underPercentageState[dungeon][1]) || 0.05)}
@@ -184,6 +170,19 @@ const renderInputPairs = () => {
               className="small-input"
             />
           </div>
+          <div className="tyrannical-column">
+        <button className="toggle-button" onClick={() => handleToggleClick(dungeon, 0)}>
+        {getCustomText((underPercentageState[dungeon] && underPercentageState[dungeon][0]) || 0.05)}
+        </button>
+        <input
+              id={`input-${i}`}
+              type="number"
+              value={keyLevels[dungeon] ? keyLevels[dungeon][0] : ''}
+              onChange={(e) => handleInputChange(dungeon, 0, e.target.value)}
+              className="small-input"
+            />
+          </div>
+          
           <div className="sum-display">
         ={" "}
         {calculateMPS(

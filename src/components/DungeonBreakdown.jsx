@@ -67,6 +67,23 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
                 <div key={index} className="member-dungeons">
                   <div className="member-name">{data.character.name}</div>
                   <div className="run-types">
+                  <div className="fortified-runs">
+                      <h3>Fortified</h3>
+                      <ul>
+                        {fortifiedRuns.map((run, i) => (
+                          <div key={i} className={`dungeon-info ${
+                            run.dungeon === highlightedDungeon &&
+                            run.columnType === highlightedColumnType
+                              ? 'highlight'
+                              : ''
+                          }`}
+                          onClick={() => handleClick(run.dungeon, run.columnType)}>
+                          <span className="fdungeon-name">{run.short_name}</span>
+                          <span className="fdungeon-level">+{run.mythic_level}</span>
+                          </div>
+                        ))}
+                      </ul>
+                    </div>
                     <div className="tyrannical-runs">
                       <h3>Tyrannical</h3>
                       <ul>
@@ -85,23 +102,7 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
                         ))}
                       </ul>
                     </div>
-                    <div className="fortified-runs">
-                      <h3>Fortified</h3>
-                      <ul>
-                        {fortifiedRuns.map((run, i) => (
-                          <div key={i} className={`dungeon-info ${
-                            run.dungeon === highlightedDungeon &&
-                            run.columnType === highlightedColumnType
-                              ? 'highlight'
-                              : ''
-                          }`}
-                          onClick={() => handleClick(run.dungeon, run.columnType)}>
-                          <span className="fdungeon-name">{run.short_name}</span>
-                          <span className="fdungeon-level">+{run.mythic_level}</span>
-                          </div>
-                        ))}
-                      </ul>
-                    </div>
+                   
                   
                   </div>
                   <div className="button-container-load">
