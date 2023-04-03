@@ -58,7 +58,7 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
     if (value > 35) {
       setError("You wish");
       return;
-    } else if( value < 11 || value < 0) {
+    } else if( value < 0 ) {
       setError("Key Values must be greater than or equal to 11");
       return;
     }else{
