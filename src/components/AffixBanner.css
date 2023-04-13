@@ -1,6 +1,12 @@
+@font-face {
+    font-family: 'BAHNSCHRIFT';
+    src: url('../fonts/BAHNSCHRIFT-6.TTF') format('truetype');
+  }
+
 .affix-header{
     background-color: #282a36;
     padding-top: 85px;
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 3.1rem;
+    font-family: 'BAHNSCHRIFT';
 }

@@ -8,9 +8,9 @@
       "type": "image/x-icon"
     },
     {
-      "src": "dclearicon_32.png",
+      "src": "favicon_white_dreadplus32x32.png",
       "type": "image/png",
-      "sizes": "16x16"
+      "sizes": "32x32"
     },
     {
       "src": "logo512.png",

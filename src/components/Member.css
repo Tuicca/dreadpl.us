@@ -10,24 +10,31 @@
     justify-content: center;
     padding-top: 150px;
     padding-bottom: 120px;
-    gap: 50px; /* Optional: Add some space between Member components */
+    gap: 50px; /* space between Member components */
     background-color: #282a36;
+    max-width: calc(100% - 660px); /* Adjust the width of the container */
+    margin: 0 auto; /* Center the container */
     
-
   }
+
   .member-class-spec {
     display: flex;
     align-items: center;
     margin-bottom: 0;
   }
 
+  .member-score{
+    font-size: 1.3rem;
+  }
+
   .member {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2);
     padding: 85px;
-    width: auto;
+    width: 110px;
     margin: 15px;
     background-color: rgb(24, 25, 33);
     color: white;
@@ -54,18 +61,45 @@
   }
 
   .remove-member-btn {
-    padding: 0.5rem 1.8rem;
-    font-size: 1.1rem;
+    padding: 0.4rem 1.6rem;
+    font-size: 1.0rem;
     font-weight: bold;
     border-radius: 10px;
-    color: #fff;
-    background-color: #366f9e;
+    color: #e0dddd;
+    background-color: #1183e0;
     border: none;
     cursor: pointer;
-    margin-top: 1.7rem;
+    margin-top: 1.6rem;
     transition: 0.3s;
   }
   
   .remove-member-btn:hover {
     background-color: #777;
+  }
+
+  .redirect-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #1183e0;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .redirect-btn:hover {
+    background-color: #777;
+  }
+  
+  .redirect-icon {
+    width: 25px;
+    height: auto;
   }

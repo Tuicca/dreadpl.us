@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-scroll';
 
 import './Navbar.css';
 
 const Navbar = (props) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
     <nav className="navbar">
@@ -14,8 +19,33 @@ const Navbar = (props) => {
           <h1>Dragonflight: Season 1</h1>
         </div>
       </div>
+      
     
       <ul className="nav-links">
+      <li className="nav-item-dropdown">
+          <button onClick={toggleDropdown} className="nav-dropdown-button">
+            Useful Links
+          </button>
+          {dropdownOpen && (
+            <ul className="nav-dropdown">
+              <li>
+                <a href="https://raider.io/" target="_blank" rel="noreferrer">
+                  RaiderIO
+                </a>
+              </li>
+              <li>
+                <a href="https://www.warcraftlogs.com/" target="_blank" rel="noreferrer">
+                  Warcraft Logs
+                </a>
+              </li>
+              <li>
+                <a href="https://www.raidbots.com/simbot" target="_blank" rel="noreferrer">
+                  RAIDBOTS Simming
+                </a>
+              </li>
+            </ul>
+          )}
+        </li>
         <li className="nav-item-mpc">
           <Link
             activeClass="active"
@@ -38,6 +68,7 @@ const Navbar = (props) => {
             >About
           </Link>
         </li>
+       
       </ul>
     </nav>
   );

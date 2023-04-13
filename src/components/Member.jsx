@@ -56,13 +56,29 @@ const Member = ({ id, character, onMemberClick, onRemoveMember, hideRemoveBtn })
   return (
 
     <div className="member" onClick={() => onMemberClick(character)}>
+     
+      
       <img src={displayCharacter.thumbnail_url} alt={`${displayCharacter.name} thumbnail`} className="member-image" />
       <h3 className="member-name">{displayCharacter.name}</h3>
       <img src={roleIcon} alt={displayCharacter.active_spec_role} className="member-role-icon" />
       <p className="member-class-spec"> {displayCharacter.class}</p>
       <p className="member-spec"> {displayCharacter.active_spec_name}</p>
       <p className="member-score" style={scoreStyle}>{score}</p>
-      
+      <button
+        className="redirect-btn"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the onMemberClick event
+          e.preventDefault(); // Prevent default link behavior
+          window.open(displayCharacter.profile_url, "_blank");
+        }}
+      >
+      <img
+        src={require('../images/redirect.png')}
+        alt="Raider IO"
+        className="redirect-icon"
+      />
+      </button>
+
       {!hideRemoveBtn && (
       <button
       className="remove-member-btn"

@@ -39,12 +39,13 @@ function App() {
             mythic_plus_best_runs: result.data.mythic_plus_best_runs,
             mythic_plus_alternate_runs: result.data.mythic_plus_alternate_runs,
           };
-         
+  
           return combinedData;
         });
   
         const results = await Promise.all(promises);
         // Process the results and update the state here
+        
         setCharacters(results.map(result => result.character));
         setDungeonData(results);
   
@@ -57,7 +58,7 @@ function App() {
       try {
         const response = await axios.get('https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en');
         setAffixes(response.data.title);
-        //console.log("AFFIX RESPONSE: ",response);
+        
       } catch (error) {
         console.error("Error fetching affixes:", error);
       }
@@ -84,6 +85,7 @@ const handleMemberClick = (name, realm) => {
   }
   
 };
+
   /* I may want this for a future iteration... cookie storage and add/remove
   const handleCharacterSearch = (newCharacter) => {
     setCharacters((prevCharacters) => [...prevCharacters, newCharacter]);
@@ -122,17 +124,24 @@ const handleMemberClick = (name, realm) => {
               <AffixBanner affixes={affixes} />
               </div>
               <div className="members-container">
-              {characters.map((character, index) => (
-              <Member
-                key={`${character.name}-${character.realm}`}
-                id={index}
-                character={character}
-                onMemberClick={() => handleMemberClick(character.name, character.realm)}
-                onRemoveMember={handleRemoveMember}
-                hideRemoveBtn={dbdVisible}
-              />
-              ))}
+                {characters
+                  .sort((a, b) => {
+                    const aScore = a.mythic_plus_scores_by_season[0].scores.all;
+                    const bScore = b.mythic_plus_scores_by_season[0].scores.all;
+                    return bScore - aScore;
+                  })
+                  .map((character, index) => (
+                    <Member
+                      key={`${character.name}-${character.realm}`}
+                      id={index}
+                      character={character}
+                      onMemberClick={() => handleMemberClick(character.name, character.realm)}
+                      onRemoveMember={handleRemoveMember}
+                      hideRemoveBtn={dbdVisible}
+                    />
+                  ))}
               </div>
+
             
               {selectedMember && dbdVisible && (
                 <MemberDetails
