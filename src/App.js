@@ -92,13 +92,18 @@ const handleMemberClick = (name, realm) => {
   };
   */
 
-  const handleRemoveMember = (idToRemove) => {
-    const prevCharacters = characters.filter((_, index) => index !== idToRemove);
-    const prevDungeonData = dungeonData.filter((_, index) => index !== idToRemove);
+  const handleRemoveMember = (name, realm) => {
+    const prevCharacters = characters.filter(
+      (character) => character.name !== name || character.realm !== realm
+    );
+    const prevDungeonData = dungeonData.filter(
+      (data) => data.character.name !== name || data.character.realm !== realm
+    );
   
     setCharacters(prevCharacters);
     setDungeonData(prevDungeonData);
   };
+  
 
   //render
   console.log('App.js dungeonData:', dungeonData);
@@ -136,7 +141,7 @@ const handleMemberClick = (name, realm) => {
                       id={index}
                       character={character}
                       onMemberClick={() => handleMemberClick(character.name, character.realm)}
-                      onRemoveMember={handleRemoveMember}
+                      onRemoveMember={() => handleRemoveMember(character.name, character.realm)}
                       hideRemoveBtn={dbdVisible}
                     />
                   ))}

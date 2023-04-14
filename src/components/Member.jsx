@@ -64,6 +64,7 @@ const Member = ({ id, character, onMemberClick, onRemoveMember, hideRemoveBtn })
       <p className="member-class-spec"> {displayCharacter.class}</p>
       <p className="member-spec"> {displayCharacter.active_spec_name}</p>
       <p className="member-score" style={scoreStyle}>{score}</p>
+    
       <button
         className="redirect-btn"
         onClick={(e) => {
