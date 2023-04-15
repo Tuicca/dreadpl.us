@@ -7,7 +7,7 @@ const teamMembers = [
   { server: 'Korgath', name: 'Laranthir' },
   { server: 'Frostmane', name: 'Leonel' },
   { server: 'Frostmane', name: 'Tuicca' },
-  { server: 'Frostmane', name: 'Vodka' },
+  { server: 'Frostmane', name: 'Kosigan' },
   { server: 'Ner\'zhul', name: 'Yokoyama' }
 ];
 export default teamMembers
