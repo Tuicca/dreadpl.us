@@ -2,7 +2,7 @@ const teamMembers = [
   { server: 'Tichondrius', name: 'Arcæ' },
   { server: 'Frostmane', name: 'Bigmayex' },
   { server: 'Mal\'ganis', name: 'Eremes' },
-  { server: 'Frostmane', name: 'Icantheal' },
+  { server: 'Frostmane', name: 'Paddlin' },
   { server: 'Frostmane', name: 'Kardoroth' },
   { server: 'Korgath', name: 'Laranthir' },
   { server: 'Frostmane', name: 'Leonel' },
