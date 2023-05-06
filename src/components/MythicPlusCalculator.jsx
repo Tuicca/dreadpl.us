@@ -131,6 +131,7 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
     });
   };
 
+  //variable text for the timing bonus buttons, based on the underPercentage value currently set on button
   const getCustomText = (value) => {
     if (value === 0.05) {
       return '+1';

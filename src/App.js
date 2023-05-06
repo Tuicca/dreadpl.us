@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import './loadingScreen.css';
 import './App.css';
@@ -9,6 +10,7 @@ import MemberDetails from './components/MemberDetails';
 import useDocumentTitle from './useDocumentTitle';
 import DungeonBreakdown from './components/DungeonBreakdown';
 import MythicPlusCalculator from './components/MythicPlusCalculator';
+import NextPage from './components/NextPage'; 
 import About from './components/About';
 import AffixBanner from './components/AffixBanner';
 import Footer from './components/Footer';
@@ -58,6 +60,7 @@ function App() {
       try {
         const response = await axios.get('https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en');
         setAffixes(response.data.title);
+       
         
       } catch (error) {
         console.error("Error fetching affixes:", error);
@@ -105,72 +108,87 @@ const handleMemberClick = (name, realm) => {
   };
   
 
-  //render
   console.log('App.js dungeonData:', dungeonData);
-  return (
-    <div className="page-container">
-      {isLoading ? (
-        <div className="loading-screen">
-        <div className="lds-ring-container">
-          <div className="lds-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-      ) : (
-        <>
-          <div className="App">
-            <Navbar />
-            <div className="content">
-              <div className="affix-container">
-              <AffixBanner affixes={affixes} />
-              </div>
-              <div className="members-container">
-                {characters
-                  .sort((a, b) => {
-                    const aScore = a.mythic_plus_scores_by_season[0].scores.all;
-                    const bScore = b.mythic_plus_scores_by_season[0].scores.all;
-                    return bScore - aScore;
-                  })
-                  .map((character, index) => (
-                    <Member
-                      key={`${character.name}-${character.realm}`}
-                      id={index}
-                      character={character}
-                      onMemberClick={() => handleMemberClick(character.name, character.realm)}
-                      onRemoveMember={() => handleRemoveMember(character.name, character.realm)}
-                      hideRemoveBtn={dbdVisible}
-                    />
-                  ))}
-              </div>
 
-            
-              {selectedMember && dbdVisible && (
-                <MemberDetails
-                  dungeonData={dungeonData} 
-                  character={selectedMember}
-                />
-              )}
+  return (
+    <BrowserRouter>
+    <div className="page-container">
+    <Routes>
+        <Route path="/" 
+          element={
+          <>
+            {isLoading ? (
+              <div className="loading-screen">
+              <div className="lds-ring-container">
+                <div className="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
             </div>
-          </div>
-          <main>
-           <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
-          <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
-               
-          </main>
-      <div className="about">
-        <About ></About>
-      </div>
-      <div className="footer">
-      <Footer />
-      </div>
-        </>
-      )}
+            ) : (
+              <>
+                <div className="App">
+                  <Navbar />
+                  <div className="content">
+                    <div className="affix-container">
+                    <AffixBanner affixes={affixes} />
+                    {console.log(affixes)}
+                    </div>
+                    <div className="members-container">
+                      {characters
+                        .sort((a, b) => {
+                          const aScore = a.mythic_plus_scores_by_season[0].scores.all;
+                          const bScore = b.mythic_plus_scores_by_season[0].scores.all;
+                          return bScore - aScore;
+                        })
+                        .map((character, index) => (
+                          <Member
+                            key={`${character.name}-${character.realm}`}
+                            id={index}
+                            character={character}
+                            onMemberClick={() => handleMemberClick(character.name, character.realm)}
+                            onRemoveMember={() => handleRemoveMember(character.name, character.realm)}
+                            hideRemoveBtn={dbdVisible}
+                          />
+                        ))}
+                    </div>
+
+                  
+                    {selectedMember && dbdVisible && (
+                      <MemberDetails
+                        dungeonData={dungeonData} 
+                        character={selectedMember}
+                      />
+                    )}
+                  </div>
+                </div>
+                <main>
+                <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
+                <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
+                    
+                </main>
+            <div className="about">
+              <About ></About>
+            </div>
+            <div className="footer">
+            <Footer />
+            </div>
+              </>
+            )}
+          </>
+        }
+      />
+        <Route path="/next" 
+          element={<NextPage />} 
+        />
+
+    </Routes>
     </div>
-  );
+    </BrowserRouter>
+  ); 
 }
 
 
