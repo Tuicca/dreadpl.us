@@ -4,7 +4,26 @@ import './NextPage.css';
 const NextPage = () => {
   const [response, setResponse] = useState('');
   const [prompt, setPrompt] = useState('');
+  const [displayedResponse, setDisplayedResponse] = useState('');
 
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < response.length) {
+        setDisplayedResponse((prevDisplayedResponse) =>
+          prevDisplayedResponse + response[index]
+        );
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50); // You can adjust the typing speed by changing this value
+  
+    return () => {
+      clearInterval(timer);
+    };
+  }, [response]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,17 +51,21 @@ const NextPage = () => {
     }
   };
   
-    return (
-      <div>
+  return (
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <input type="text" value={prompt} onChange={e => setPrompt(e.target.value)} />
+        <input
+          type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
         <button type="submit">Submit</button>
       </form>
-      
-        <div className="response-message">
-          {response}
-        </div>
+  
+      <div className="response-message">
+        {response}
       </div>
-    );
+    </div>
+  );
   };
   export default NextPage

@@ -1,3 +1,60 @@
-.response-message{
+@keyframes typing {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+  
+  .response-message {
+    font-size: 24px;
+    margin-top: 30px;
+    padding-top: 3rem;
+    text-align: center;
+    white-space: pre-wrap;
+    border-right: 3px solid #000;
+    overflow: hidden;
     color: white;
-}
+    width: 50%;
+  }
+  
+  .typing-animation {
+    animation: typing 4s steps(40, end) forwards;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

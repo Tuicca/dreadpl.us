@@ -16,7 +16,7 @@ const Navbar = (props) => {
       
       <div className="nav-banner-container">
         <div className="nav-banner">
-          <h1>Dragonflight: Season 1</h1>
+          <h1>Dragonflight: Season 2</h1>
         </div>
       </div>
       
