@@ -1,5 +1,5 @@
 const teamMembers = [
-  { server: 'Tichondrius', name: 'Arcæ' },
+  { server: 'Tichondrius', name: 'Arrcae' },
   { server: 'Frostmane', name: 'Bigmayex' },
   { server: 'Ner\'Zhul', name: 'Eremes' },
   { server: 'Frostmane', name: 'Paddlin' },
