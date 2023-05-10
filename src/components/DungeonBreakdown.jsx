@@ -7,14 +7,14 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
     const [highlightedColumnType, setHighlightedColumnType] = useState(null);
 
     const dungeons = [
-      "SBG",
-      "COS",
-      "TJS",
-      "HOV",
-      "AA",
-      "AV",
-      "NO",
-      "RLP",
+      "BH",
+      "FH",
+      "HOI",
+      "NL",
+      "NELT",
+      "UNDR",
+      "VP",
+      "ULD"
     ];
 
 

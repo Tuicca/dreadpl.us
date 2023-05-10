@@ -6,14 +6,14 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
   const [error, setError] = useState("");
 
   const dungeons = [
-    "SBG",
-    "COS",
-    "TJS",
-    "HOV",
-    "AA",
-    "AV",
-    "NO",
-    "RLP",
+    "BH",
+    "FH",
+    "HOI",
+    "NL",
+    "NELT",
+    "UNDR",
+    "VP",
+    "ULD"
   ];
 
   const scoreColorMapping = {

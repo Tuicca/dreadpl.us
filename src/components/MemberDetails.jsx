@@ -43,18 +43,24 @@ const findLowestAlternateHighestBest = (dungeonData, character) => {
     return { lowestAlternate: null, highestBest: null, newScore: null };
   }
 
-  const lowestAlternate = characterData.mythic_plus_alternate_runs.reduce((min, run) => run.score < min.score ? run : min);
-  const highestBest = characterData.mythic_plus_best_runs.reduce((max, run) => run.score > max.score ? run : max);
+  //We set initialized values to prevent an error for empty data on season reset.
+  //TODO: Need conditional message to the end-user for missing data and to run more dungeons and check back later.
+  const lowestAlternate = characterData.mythic_plus_alternate_runs.reduce(
+    (min, run) => (run.score < min.score ? run : min),
+    { score: Infinity }
+  );
+  
+  const highestBest = characterData.mythic_plus_best_runs.reduce(
+    (max, run) => (run.score > max.score ? run : max),
+    { score: -Infinity }
+  );
 
   const newScore = calculateMPS(highestBest.level, lowestAlternate.level);
-  //console.log("Lowest Alternate: ", { lowestAlternate });
-  //console.log("Highest Best: ", { highestBest });
-  //console.log("newScore: ", { newScore })
+
   return { lowestAlternate, highestBest, newScore };
+
 };
 
-
-//This returns "highestBestSameDungeon" which is the highest score you have for the same dungeon as your LOWEST KEY LEVEL.
 const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
   if (!character || !character.name || !character.realm) {
     console.log("findHighestKeyForDungeon character is null or missing required props");
@@ -117,8 +123,6 @@ const MemberDetails = ({ dungeonData, character }) => {
     return scoreTable;
   };
 
-
-  
 
   const scoreTable = calculateScoreTable(lowestAlternate, highestBestSameDungeon, highestBest);
   // I need to add the total "Rating" value for both highestBest Key-of-same-dungeon and lowestAlternate Key-of-same-dungeon
