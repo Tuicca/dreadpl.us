@@ -94,9 +94,7 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
     }
     const TimeBonus1 = calculateTimeBonus(underPercentage1);
     const TimeBonus2 = calculateTimeBonus(underPercentage2);
-    //const underPercentage = 0.05;
-    //const TimeBonus = calculateTimeBonus(underPercentage);
-    //const TimeBonus = 5 * (Math.min(0.05 / 0.4,1))
+  
     const higherKey = Math.max(keyLevel1, keyLevel2);
     const lowerKey = Math.min(keyLevel1, keyLevel2);
     const bestKey = ((100 + (higherKey - 10) * 7) + TimeBonus1) * 1.5;
