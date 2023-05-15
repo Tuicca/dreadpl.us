@@ -28,6 +28,11 @@ const Navbar = (props) => {
           </button>
           {dropdownOpen && (
             <ul className="nav-dropdown">
+                <li>
+                <a href="https://keystone-calculator.com" target="_blank" rel="noreferrer">
+                  Keystone Calculator
+                </a>
+              </li>
               <li>
                 <a href="https://raider.io/" target="_blank" rel="noreferrer">
                   RaiderIO
