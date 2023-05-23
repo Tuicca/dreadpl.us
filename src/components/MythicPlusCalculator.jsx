@@ -92,6 +92,11 @@ const MythicPlusCalculator = ({keyLevels, setKeyLevels}) => {
     if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
       return 0;
     }
+
+    if (!keyLevel1 && !keyLevel2) {
+      return 0;
+    }
+    
     const TimeBonus1 = calculateTimeBonus(underPercentage1);
     const TimeBonus2 = calculateTimeBonus(underPercentage2);
   
