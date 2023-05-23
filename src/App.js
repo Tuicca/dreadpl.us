@@ -9,11 +9,15 @@ import teamMembers from './teamMembers';
 import MemberDetails from './components/MemberDetails';
 import useDocumentTitle from './useDocumentTitle';
 import DungeonBreakdown from './components/DungeonBreakdown';
+
 import MythicPlusCalculator from './components/MythicPlusCalculator';
+
 import NextPage from './components/NextPage'; 
 import About from './components/About';
 import AffixBanner from './components/AffixBanner';
 import Footer from './components/Footer';
+
+
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -167,7 +171,14 @@ const handleMemberClick = (name, realm) => {
                 </div>
                 <main>
                 <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
-                <MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />
+
+                <div className="calculator-placeholder">
+                  The calculator is currently not available, please visit 
+                  <a href="https://keystone-calculator.com" target="_blank" rel="noopener noreferrer" className="custom-link"> Keystone Calculator </a> instead.
+                </div>
+
+                {/*<MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />*/}
+                
                     
                 </main>
             <div className="about">

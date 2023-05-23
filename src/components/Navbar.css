@@ -145,6 +145,10 @@
     font-family: 'BAHNSCHRIFT';
     font-size: 1.3rem;
   }
+
+  .nav-dropdown-button:hover{
+    background-color: dimgray;
+  }
   
   .nav-dropdown {
     display: flex;

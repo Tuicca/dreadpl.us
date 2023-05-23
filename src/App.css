@@ -54,3 +54,21 @@
 .members-wrapper {
   position: relative;
 }
+
+.calculator-placeholder{
+  color: white;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  font-size: 38px;
+  justify-content: center;
+  text-align: center;
+}
+.custom-link {
+  color: orange; /* this will make the link color same as the text color */
+  text-decoration: none; /* this will remove the underline */
+}
+
+.custom-link:hover {
+  color: orange;
+  text-decoration: underline; 
+}
