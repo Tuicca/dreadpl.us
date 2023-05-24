@@ -4,6 +4,6 @@ const teamMembers = [
   { server: 'Frostmane', name: 'Paddlin' },
   { server: 'Zul\'jin', name: 'Jazzuschrist' },
   { server: 'Frostmane', name: 'Vodka' },
-  { server: 'Ner\'zhul', name: 'Yokoyama' }
+  { server: 'Ner\'zhul', name: 'Yokoyama' },
 ];
 export default teamMembers
