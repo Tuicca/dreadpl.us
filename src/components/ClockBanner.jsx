@@ -29,7 +29,7 @@ const ClockBanner = () => {
 
     return (
         <div className="clockBanner">
-            <p>Yoko's Roadtrip in:</p>
+            <p>Yoko's Roadtrip:</p>
             <p>{timeRemaining.days} Days</p>
             <p>{timeRemaining.hours} Hours</p>
             <p>{timeRemaining.minutes} Minutes</p>
