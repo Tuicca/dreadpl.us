@@ -15,6 +15,7 @@ import MythicPlusCalculator from './components/MythicPlusCalculator';
 import NextPage from './components/NextPage'; 
 import About from './components/About';
 import AffixBanner from './components/AffixBanner';
+import ClockBanner from './components/ClockBanner';
 import Footer from './components/Footer';
 
 
@@ -138,6 +139,7 @@ const handleMemberClick = (name, realm) => {
                   <Navbar />
                   <div className="content">
                     <div className="affix-container">
+                    <ClockBanner/>
                     <AffixBanner affixes={affixes} />
                     {console.log(affixes)}
                     </div>

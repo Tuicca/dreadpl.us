@@ -1,0 +1,11 @@
+.clockBanner {
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+}
+.clockBanner p {
+    display: inline-block;
+    margin: 0 10px; /* Adds horizontal margins */
+}
