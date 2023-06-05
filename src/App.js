@@ -18,6 +18,8 @@ import AffixBanner from './components/AffixBanner';
 import ClockBanner from './components/ClockBanner';
 import Footer from './components/Footer';
 
+import Analytics from './pages/Analytics';
+
 
 
 function App() {
@@ -197,6 +199,9 @@ const handleMemberClick = (name, realm) => {
         <Route path="/next" 
           element={<NextPage />} 
         />
+        {/*<Route path="analytics"
+          element={<Analytics />}
+      />*/}
 
     </Routes>
     </div>
