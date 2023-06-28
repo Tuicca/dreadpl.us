@@ -52,15 +52,9 @@ const Navbar = (props) => {
           )}
         </li>
         <li className="nav-item-mpc">
-          <Link
-            activeClass="active"
-            to="mythic-plus-calculator"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-            >Mythic Plus Calculator
-          </Link>
+          <a href="https://keystone-calculator.com" target="_blank" rel="noreferrer">
+            Mythic Plus Calculator
+          </a>
         </li>
         <li className="nav-item-about">
         <Link
