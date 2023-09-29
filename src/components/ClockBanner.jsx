@@ -6,7 +6,7 @@ const ClockBanner = () => {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            const targetDate = new Date('2023-07-21');
+            const targetDate = new Date('2023-11-28');
             const currentDate = new Date();
 
             const differenceInTime = targetDate.getTime() - currentDate.getTime();
@@ -29,7 +29,7 @@ const ClockBanner = () => {
 
     return (
         <div className="clockBanner">
-            <p>Yoko's Roadtrip:</p>
+            <p>Countdown to Season 3:</p>
             <p>{timeRemaining.days} Days</p>
             <p>{timeRemaining.hours} Hours</p>
             <p>{timeRemaining.minutes} Minutes</p>
