@@ -6,7 +6,7 @@ const ClockBanner = () => {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            const targetDate = new Date('2023-11-07');
+            const targetDate = new Date('2023-11-14');
             const currentDate = new Date();
 
             const differenceInTime = targetDate.getTime() - currentDate.getTime();
