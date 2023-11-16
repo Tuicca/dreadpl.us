@@ -141,7 +141,7 @@ const handleMemberClick = (name, realm) => {
                   <Navbar />
                   <div className="content">
                     <div className="affix-container">
-                    <ClockBanner/>
+                    {/*<ClockBanner/>*/
                     <AffixBanner affixes={affixes} />
                     {console.log(affixes)}
                     </div>
