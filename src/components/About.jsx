@@ -4,7 +4,7 @@ const About = () => {
         <div className="about-body">
             <h1 className="about-header1">About</h1>
             <p className="about-p1">
-            WoW DF Mythic+ Team "DreadPlus" Web Project
+            WoW Mythic+ Team "DreadPlus"
             <br/><br/>
             </p>
         </div>
