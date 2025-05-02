@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import * as d3 from 'd3';
 import './loadingScreen.css';
 import './App.css';
 import Navbar from './components/Navbar';

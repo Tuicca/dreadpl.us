@@ -47,7 +47,7 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
       setKeyLevels(newKeyLevels);
     };
 
-    function filterDungeonsByType(dungeonRuns, type) {
+    function filterDungeonsByType(dungeonRuns = [], type) {
       return dungeonRuns
         .filter((run) => run.affixes.some((affix) => affix.name === type))
         .map((run) => ({ ...run, columnType: type }));
@@ -58,7 +58,10 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
           <h2 className="dungeon-breakdown-title">Dungeon Breakdown</h2>
           <div className="dungeon-breakdown-grid">
             {dungeonData.map((data, index) => {
-               const allRuns = data.mythic_plus_best_runs.concat(data.mythic_plus_alternate_runs);
+               const bestRuns = data.mythic_plus_best_runs      || [];
+               const altRuns  = data.mythic_plus_alternate_runs || [];
+               const allRuns  = bestRuns.concat(altRuns);
+               
                const tyrannicalRuns = filterDungeonsByType(allRuns, 'Tyrannical');
                const fortifiedRuns = filterDungeonsByType(allRuns, 'Fortified');
                //console.log("data DB Breakdown: ",data);
