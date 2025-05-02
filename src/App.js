@@ -177,10 +177,6 @@ const handleMemberClick = (name, realm) => {
                 <main>
                 <DungeonBreakdown dungeonData={dungeonData} setKeyLevels={setKeyLevels} />
 
-                <div className="calculator-placeholder">
-                  The calculator is currently not available, please visit 
-                  <a href="https://keystone-calculator.com" target="_blank" rel="noopener noreferrer" className="custom-link"> Keystone Calculator </a> instead.
-                </div>
 
                 {/*<MythicPlusCalculator keyLevels={keyLevels} setKeyLevels={setKeyLevels} />*/}
                 
