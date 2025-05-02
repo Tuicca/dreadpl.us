@@ -1,167 +1,128 @@
 import React, { useEffect, useState } from 'react';
 import './MemberDetails.css';
 
-//Calculator Starts Here
+// Calculator function (unchanged)
 const calculateMPS = (keyLevel1, keyLevel2) => {
-  if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
-    return "";
-  }
-  if (isNaN(keyLevel1) || isNaN(keyLevel2)) {
-    return "";
-  }
-
-  if(keyLevel1 === keyLevel2){
-    //console.log("key levels are the same now");
-  }
-
+  if (isNaN(keyLevel1) || isNaN(keyLevel2)) return "";
   const UP = 5 * Math.min(0.05 / 0.4, 1);
   const higherKey = Math.max(keyLevel1, keyLevel2);
   const lowerKey = Math.min(keyLevel1, keyLevel2);
-
   const bestKey = ((100 + (higherKey - 10) * 7) + UP) * 1.5;
-  //console.log("Higher Key", higherKey,"-> ", bestKey);
-
   const alternateKey = ((100 + (lowerKey - 10) * 7) + UP) * 0.5;
-  //console.log("Lower Key", lowerKey,"->",alternateKey);
-  
-  //console.log("Combined Score= ",bestKey + alternateKey);
-
   return (bestKey + alternateKey).toFixed(2);
 };
 
-
-//findLowest...
+// Find lowest alternate run and highest best run, safely
 const findLowestAlternateHighestBest = (dungeonData, character) => {
-
-  if (!character || !character.name || !character.realm) {
-    console.log("findLowestAlternateHighBest character is null or missing required props");
-    return null;
-  }
-  const characterData = dungeonData.find(data => data.character && data.character.name === character.name && data.character.realm === character.realm);
-
-  if (!characterData) {
-    return { lowestAlternate: null, highestBest: null, newScore: null };
-  }
-
-  //We set initialized values to prevent an error for empty data on season reset.
-  //TODO: Need conditional message to the end-user for missing data and to run more dungeons and check back later.
-  const lowestAlternate = characterData.mythic_plus_alternate_runs.reduce(
-    (min, run) => (run.score < min.score ? run : min),
-    { score: Infinity }
-  );
-  
-  const highestBest = characterData.mythic_plus_best_runs.reduce(
-    (max, run) => (run.score > max.score ? run : max),
-    { score: -Infinity }
-  );
-
-  const newScore = calculateMPS(highestBest.level, lowestAlternate.level);
-
-  return { lowestAlternate, highestBest, newScore };
-
-};
-
-const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
-  if (!character || !character.name || !character.realm) {
-    console.log("findHighestKeyForDungeon character is null or missing required props");
-    return null;
-  }
+  if (!character?.name || !character?.realm) return null;
 
   const characterData = dungeonData.find(
-    (data) =>
-      data.character &&
-      data.character.name === character.name &&
-      data.character.realm === character.realm
+    data =>
+      data.character?.name === character.name &&
+      data.character?.realm === character.realm
   );
+  if (!characterData) return { lowestAlternate: null, highestBest: null, newScore: null };
 
-  if (!characterData) {
-    return null;
-  }
+  const altRuns  = characterData.mythic_plus_alternate_runs || [];
+  const bestRuns = characterData.mythic_plus_best_runs      || [];
 
-  const highestBestSameDungeon = characterData.mythic_plus_best_runs.find(
-    (run) => run.short_name === dungeon
-  );
-  return highestBestSameDungeon;
+  const lowestAlternate = altRuns.length
+    ? altRuns.reduce((min, run) => (run.score < min.score ? run : min), { score: Infinity })
+    : null;
+
+  const highestBest = bestRuns.length
+    ? bestRuns.reduce((max, run) => (run.score > max.score ? run : max), { score: -Infinity })
+    : null;
+
+  const newScore =
+    lowestAlternate && highestBest
+      ? calculateMPS(highestBest.mythic_level, lowestAlternate.mythic_level)
+      : null;
+
+  return { lowestAlternate, highestBest, newScore };
 };
 
-
-//MemberDetail component starts here!!
-const MemberDetails = ({ dungeonData, character }) => {
-  const { lowestAlternate, highestBest} = findLowestAlternateHighestBest(
-    dungeonData,
-    character
+// Find highest best run for a specific dungeon (unchanged)
+const findHighestKeyForDungeon = (dungeonData, character, dungeon) => {
+  if (!character?.name || !character?.realm) return null;
+  const characterData = dungeonData.find(
+    data =>
+      data.character?.name === character.name &&
+      data.character?.realm === character.realm
   );
+  if (!characterData) return null;
+  return characterData.mythic_plus_best_runs?.find(run => run.short_name === dungeon) || null;
+};
+
+// Score table builder (unchanged)
+const calculateScoreTable = (lowestAlternate, highestBestSameDungeon, highestBest) => {
+  const table = [];
+  const diff = highestBest.mythic_level - lowestAlternate.mythic_level;
+  for (let i = 1; i <= diff; i++) {
+    const newLevel = lowestAlternate.mythic_level + i;
+    const newScore = calculateMPS(highestBestSameDungeon.mythic_level, newLevel);
+    const baseScore = (lowestAlternate.score * 0.5) + (highestBestSameDungeon.score * 1.5);
+    const delta = (newScore - baseScore).toFixed(2);
+    table.push({ increment: i, newLevel, delta });
+  }
+  return table;
+};
+
+const MemberDetails = ({ dungeonData, character }) => {
+  const { lowestAlternate, highestBest } = findLowestAlternateHighestBest(dungeonData, character);
   const [isRendered, setIsRendered] = useState(false);
 
   useEffect(() => {
     setIsRendered(true);
   }, [character]);
 
+  // **EARLY RETURN** if we have no data
+  if (!lowestAlternate || !highestBest) {
+    return (
+      <div className={`member-details ${isRendered ? 'slide-down' : ''}`}>
+        <h2>{character.name}</h2>
+        <p>No Mythic+ runs available for this member this season.</p>
+      </div>
+    );
+  }
+
+  // Safe to use lowestAlternate.short_name now
   const highestBestSameDungeon = findHighestKeyForDungeon(
     dungeonData,
     character,
     lowestAlternate.short_name
   );
 
-  //Calculate Score Table Here
-  const calculateScoreTable = (lowestAlternate, highestBestSameDungeon, highestBest) => {
-
-    const tableRowSize = highestBest.mythic_level - lowestAlternate.mythic_level; 
-    const scoreTable = [];
-    
-
-    for (let i = 1; i <= tableRowSize; i++) {
-      const newLowestAlternateLevel = lowestAlternate.mythic_level + i;
-      const newScore = calculateMPS(highestBestSameDungeon.mythic_level, newLowestAlternateLevel);
-      
-      const differenceInScore = (newScore - ((lowestAlternate.score*0.5) + (highestBestSameDungeon.score*1.5))).toFixed(2);
-      scoreTable.push({ increment: i, newLowestAlternateLevel, differenceInScore});
-
-    }
-
-
-    return scoreTable;
-  };
-
-
   const scoreTable = calculateScoreTable(lowestAlternate, highestBestSameDungeon, highestBest);
-  // I need to add the total "Rating" value for both highestBest Key-of-same-dungeon and lowestAlternate Key-of-same-dungeon
-  //const highestBest + alternateOfHighestBest
-  //const lowestAlternate + highestBestOfLowestAlternate
 
   return (
     <div className={`member-details ${isRendered ? 'slide-down' : ''}`}>
       <h2>{character.name}</h2>
-      {highestBest && (
-        <p className="best-key">Best Key: {highestBest.short_name}   +{highestBest.mythic_level}</p>
-      )}
 
-      {lowestAlternate && (
-        <p className="lowest-key">Lowest Key: {lowestAlternate.short_name} +{lowestAlternate.mythic_level}</p>
-      )}
-      
-      
-        <p>If your lowest key was at the same level as your best key</p>
-      
+      <p className="best-key">
+        Best Key: {highestBest.short_name} +{highestBest.mythic_level}
+      </p>
+      <p className="lowest-key">
+        Lowest Key: {lowestAlternate.short_name} +{lowestAlternate.mythic_level}
+      </p>
 
-    {/* Score table rendering */}
-    <div className="score-table">
-  <h3>Lowest Key Improvements</h3>
-  <div className="score-table-header">
-    <span>Dungeon</span>
-    <span>Score Improvement</span>
-  </div>
-  {scoreTable.map((row, index) => (
-    <div key={index} className="score-table-row">
-      <span>
-        {lowestAlternate.short_name} +{row.newLowestAlternateLevel}
-      </span>
-      <span>+{row.differenceInScore} points</span>
+      <div className="score-table">
+        <h3>Lowest Key Improvements</h3>
+        <div className="score-table-header">
+          <span>Dungeon</span>
+          <span>Score Improvement</span>
+        </div>
+        {scoreTable.map((row, idx) => (
+          <div key={idx} className="score-table-row">
+            <span>
+              {lowestAlternate.short_name} +{row.newLevel}
+            </span>
+            <span>+{row.delta} points</span>
+          </div>
+        ))}
+      </div>
     </div>
-  ))}
-</div>
-  </div>
-);
+  );
 };
 
 export default MemberDetails;
