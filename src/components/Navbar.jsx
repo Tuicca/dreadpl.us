@@ -15,10 +15,13 @@ const Navbar = (props) => {
       <div className="nav-logo">Dread+</div>
       
       <div className="nav-banner-container">
-        <div className="nav-banner">
-          <h1>The War Within: Season 2</h1>
-        </div>
-      </div>
+  <div className="nav-banner">
+    <h1 style={{ fontFamily: `"Comic Sans MS", "Comic Sans", cursive` }}>
+      The War Within: Season 2
+    </h1>
+  </div>
+</div>
+
       
     
       <ul className="nav-links">
