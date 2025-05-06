@@ -1,6 +1,10 @@
 @font-face {
     font-family: 'BAHNSCHRIFT';
     src: url('../fonts/BAHNSCHRIFT-6.TTF') format('truetype');
+    font-family: 'GrenzeGotisch-VariableFont_wght';
+    src: url('../fonts/BAHNSCHRIFT-6.TTF') format('truetype');
+    src: url('../fonts/GrenzeGotisch-VariableFont_wght.ttf') format('truetype');
+    
   }
 
   .affix-header {

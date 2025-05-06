@@ -31,6 +31,8 @@ const affixColorMapping = {
 
     //Seasonal
     'Thundering':'#3399dd',
+    'Xal\'atath\'s Bargain: Pulsar':'#54b4e7',
+    'Xal\'atath\'s Guile':'#268050',
 
     '': 'white'
   };

@@ -3,6 +3,7 @@ import { Link } from 'react-scroll';
 
 import './Navbar.css';
 
+
 const Navbar = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -12,11 +13,11 @@ const Navbar = (props) => {
 
   return (
     <nav className="navbar">
-      <div className="nav-logo">Dread+</div>
+      <div className="nav-logo" data-text="Dread+">Dread+</div>
       
       <div className="nav-banner-container">
   <div className="nav-banner">
-    <h1 style={{ fontFamily: `"Comic Sans MS", "Comic Sans", cursive` }}>
+    <h1 >
       The War Within: Season 2
     </h1>
   </div>
