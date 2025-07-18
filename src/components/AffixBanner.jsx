@@ -24,14 +24,15 @@ const affixColorMapping = {
     'Sanguine': '#FF0037',
 
 
-    //Purple (Special - Season 2)
+    //Purple (Special - Dragonflight DEPRICATED)
     'Incorporeal': '#A020F0',
     'Afflicted' : '#A020F0',
     'Entangling': '#A020F0',
 
-    //Seasonal
+    //Seasonal - changes often
     'Thundering':'#3399dd',
     'Xal\'atath\'s Bargain: Pulsar':'#54b4e7',
+    'Xal\'atath\'s Bargain: Devour':'#0096FF',
     'Xal\'atath\'s Guile':'#268050',
 
     '': 'white'
