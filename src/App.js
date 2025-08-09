@@ -13,7 +13,6 @@ import DungeonBreakdown from './components/DungeonBreakdown';
 
 import MythicPlusCalculator from './components/MythicPlusCalculator';
 
-import NextPage from './components/NextPage'; 
 import About from './components/About';
 import AffixBanner from './components/AffixBanner';
 import ClockBanner from './components/ClockBanner';
@@ -193,9 +192,7 @@ const handleMemberClick = (name, realm) => {
           </>
         }
       />
-        <Route path="/next" 
-          element={<NextPage />} 
-        />
+      
         {/*<Route path="analytics"
           element={<Analytics />}
       />*/}
