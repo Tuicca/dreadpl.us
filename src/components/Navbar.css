@@ -45,6 +45,15 @@
     transition: color 0.3s;
     cursor: pointer;
   }
+
+  .nav-item-playlists {
+    margin-left: 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
   
 
   .nav-banner-container {

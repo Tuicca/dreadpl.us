@@ -1,0 +1,43 @@
+.playlists-page {
+  padding: 2rem;
+  color: #fff;
+  font-family: 'BAHNSCHRIFT';
+}
+
+.playlists-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.playlists-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.playlist {
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.playlist-genre {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.videos-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.videos-scroll img {
+  width: 100%;
+  border-radius: 4px;
+}
+
