@@ -24,7 +24,9 @@ const VoidParticles = () => {
       dy: (Math.random() - 0.5) * 0.4,
     }));
 
-    const supernovas = [];
+
+    const supernovaParticles = [];
+
     const supernovaChance = 0.001; // ~0.1% chance per frame for a very rare supernova
 
     const draw = () => {
@@ -45,22 +47,41 @@ const VoidParticles = () => {
 
       if (Math.random() < supernovaChance) {
         const p = particles[Math.floor(Math.random() * particles.length)];
-        supernovas.push({ x: p.x, y: p.y, radius: p.radius, alpha: 1 });
+
+        const fragments = 8 + Math.floor(Math.random() * 8);
+        for (let i = 0; i < fragments; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 0.5;
+          supernovaParticles.push({
+            x: p.x,
+            y: p.y,
+            originX: p.x,
+            originY: p.y,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed,
+            radius: Math.random() * 1 + 0.5,
+          });
+        }
+        p.x = Math.random() * canvas.width;
+        p.y = Math.random() * canvas.height;
       }
 
-      for (let i = supernovas.length - 1; i >= 0; i--) {
-        const s = supernovas[i];
-        s.radius += 2;
-        s.alpha -= 0.03;
-        if (s.alpha <= 0) {
-          supernovas.splice(i, 1);
+      for (let i = supernovaParticles.length - 1; i >= 0; i--) {
+        const s = supernovaParticles[i];
+        s.x += s.dx;
+        s.y += s.dy;
+        const dist = Math.hypot(s.x - s.originX, s.y - s.originY);
+        const alpha = 1 - dist / 20;
+        if (alpha <= 0) {
+          supernovaParticles.splice(i, 1);
+
           continue;
         }
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
-        ctx.shadowColor = '#ff44ff';
-        ctx.shadowBlur = 15;
+
+        ctx.fillStyle = `rgba(128,0,255,${alpha * 0.3})`;
+
         ctx.fill();
       }
 
