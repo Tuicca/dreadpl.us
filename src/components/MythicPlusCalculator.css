@@ -67,14 +67,14 @@
   padding: 0.5rem;
   border: 2px solid #5262ff;
   font-size: 1rem;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 15px;
   text-align: center;
   margin-top: 0.5rem;
 }
 
 .small-input:focus {
-  background-color: #B0C4DE;
+  background-color: transparent;
 }
 
 .sum-display {
@@ -157,7 +157,7 @@
 }
 .toggle-button{
   border-radius: 10px;
-  background-color: #696969;
+  background-color: transparent;
   cursor: pointer;
   color: white;
   border: none;

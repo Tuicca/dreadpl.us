@@ -4,7 +4,7 @@
   align-items: center;
   padding-bottom: 75px;
   color: white;
-  background-color: #282a36;
+  background-color: transparent;
   transform: translateY(calc(-10%)); 
   opacity: 0;
   transition: transform 0.5s ease;
@@ -13,7 +13,7 @@
 
 .member-details.slide-down {
   transform: translateY(0);
-  background-color: #282a36;
+  background-color: transparent;
   backface-visibility: hidden;
   opacity: 1;
 }
@@ -31,7 +31,7 @@
 
   
   .best-key:hover{
-    background-color: green;
+    background-color: transparent;
   }
 
   .lowest-key {
@@ -45,7 +45,7 @@
   }
 
   .lowest-key:hover{
-    background-color: red;
+    background-color: transparent;
   }
   
   .score-table {
@@ -63,7 +63,7 @@
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    background-color: #282a36;
+    background-color: transparent;
     font-weight: bold;
     color: white; /* Add this line for better readability */
     text-align: center;
