@@ -20,10 +20,12 @@ const Playlists = () => {
               {genre === 'Electronic Atmospheric' ? (
                 <a
                   href={`https://www.youtube.com/playlist?list=${videos[0]}`}
+
                   target="_blank"
                   rel="noreferrer"
                 >
                   <img
+
                     src={`https://img.youtube.com/vi/${videos[0]}/0.jpg`}
                     alt="YouTube playlist thumbnail"
                   />
@@ -43,6 +45,7 @@ const Playlists = () => {
                   </a>
                 ))
               )}
+
             </div>
           </div>
         ))}
