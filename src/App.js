@@ -19,6 +19,7 @@ import ClockBanner from './components/ClockBanner';
 import Footer from './components/Footer';
 
 import Analytics from './pages/Analytics';
+import VoidParticles from './components/VoidParticles';
 
 
 
@@ -119,6 +120,7 @@ const handleMemberClick = (name, realm) => {
 
   return (
     <BrowserRouter>
+    <VoidParticles />
     <div className="page-container">
     <Routes>
         <Route path="/" 
