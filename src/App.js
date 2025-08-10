@@ -20,6 +20,7 @@ import Footer from './components/Footer';
 
 import Analytics from './pages/Analytics';
 import VoidParticles from './components/VoidParticles';
+import Playlists from './pages/Playlists';
 
 
 
@@ -194,7 +195,18 @@ const handleMemberClick = (name, realm) => {
           </>
         }
       />
-      
+
+        <Route
+          path="/playlists"
+          element={
+            <>
+              <Navbar />
+              <Playlists />
+              <Footer />
+            </>
+          }
+        />
+
         {/*<Route path="analytics"
           element={<Analytics />}
       />*/}
