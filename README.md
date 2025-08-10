@@ -1,11 +1,11 @@
 Dread+
 
-The War Within: Season 2 Mythic Plus Tracker
+The War Within: Season 3 Mythic Plus Tracker
 Website: https://dreadpl.us
 
 📜 About
 
-Dread+ is a World of Warcraft: The War Within Season 2 companion site for our Mythic Plus team.
+Dread+ is a World of Warcraft: The War Within Season 3 companion site for our Mythic Plus team.
 It automatically tracks scores, dungeon progression, and affixes, plus includes an interactive Dungeon Highlighting Tool to see who else has completed what keys at a glance.
 ✨ Features
 
@@ -15,7 +15,7 @@ It automatically tracks scores, dungeon progression, and affixes, plus includes 
 
     Clickable Dungeon Highlights to instantly compare key completions across the team
 
-    Weekly Affix Display (The War Within S2)
+    Weekly Affix Display (The War Within S3)
 
     Useful Links Hub for quick access to tools, logs, and calculators
 
