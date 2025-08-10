@@ -18,7 +18,7 @@
     font-size: 1rem;
     border-radius: 10px;
     color: #fff;
-    background-color: #366f9e;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     margin-top: .5rem;
@@ -28,7 +28,7 @@
   }
 
   .button-container-load button:hover{
-    background-color: #1f4666;
+    background-color: transparent;
     cursor: pointer;
   }
 
@@ -42,11 +42,11 @@
     padding: 5px; 
     width: 90%;
     transition-duration: 0.1s;
-    background-color:rgba(23, 27, 29, 0.548);
+    background-color: transparent;
   }
 /*
   .member-dungeons:hover {
-    background-color: rgba(23, 27, 29, 0.548);
+    background-color: transparent;
     -webkit-transform: scale(1.05);
   }
   */
@@ -126,6 +126,6 @@
   }
 
   .highlight {
-    /*background-color: rgb(88, 113, 160);*/
-    background-color: rgb(158, 32, 32);
+    /*background-color: transparent;*/
+    background-color: transparent;
   }
