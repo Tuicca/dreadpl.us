@@ -1,5 +1,5 @@
 {
-  "short_name": "DreadPlus",
+  "short_name": "Dread+",
   "name": "Dread Mythic+",
   "icons": [
     {
@@ -8,14 +8,9 @@
       "type": "image/x-icon"
     },
     {
-      "src": "favicon_white_dreadplus32x32.png",
+      "src": "favicon_void_dreadplus32x32.png",
       "type": "image/png",
       "sizes": "32x32"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",

@@ -1,8 +1,11 @@
 @font-face {
   font-family: 'BAHNSCHRIFT';
   font-family: 'GrenzeGotisch-VariableFont_wght';
+  font-family: 'CinzelDec';
+
   src: url('../fonts/BAHNSCHRIFT-6.TTF') format('truetype');
   src: url('../fonts/GrenzeGotisch-VariableFont_wght.ttf') format('truetype');
+  src: url('../fonts/CinzelDecorative-Regular.ttf') format('truetype');
 }
 
 
@@ -21,17 +24,18 @@
     font-size: 3rem;
     color: #fff;
     font-weight: bold;
-    font-family: 'BAHNSCHRIFT';
+    font-family: 'CinzelDec';
     letter-spacing: 4px;
+    text-decoration: none;
 
   }
  
   .nav-links {
-    
+
     list-style-type: none;
     display: flex;
     align-items: center;
-    font-family: 'BAHNSCHRIFT';
+    font-family: 'CinzelDec';
     margin: 0;
     padding: 20px;
 
@@ -50,6 +54,7 @@
     margin-left: 2rem;
     color: #fff;
     text-decoration: none;
+    font-family: 'CinzelDec';
     font-size: 1.3rem;
     transition: color 0.3s;
     cursor: pointer;
@@ -63,18 +68,21 @@
     transform: translate(-50%, -50%);
 
   }
-  
-  .nav-banner {
-    display: flex;
-    color: #fff;
-    align-items: center;
-    font-family: 'GrenzeGotisch-VariableFont_wght';
-    font-size: 2.5rem;
-    letter-spacing: 2.5px;
-    text-shadow: 2px 2px 4px #ff000d;
-    
-    
-  }
+ .nav-banner {
+  display: flex;
+  color: #d0b3ff; /* light lavender for readable arcane text */
+  align-items: center;
+  font-family: 'CinzelDec'; /* make sure this matches your import name */
+  font-size: 2.5rem;
+  letter-spacing: 2.5px;
+
+  /* layered shadow for depth and void glow */
+  text-shadow: 
+    2px 2px 6px rgba(21, 36, 168, 0.7), /* purple glow */
+    1px 1px 12px rgba(0, 50, 150, 0.5), /* deep blue aura */
+    5px 5px 4px rgba(0, 0, 0, 0.8); /* grounding shadow */
+}
+
   
   
   .nav-item a {
@@ -151,8 +159,9 @@
     cursor: pointer;
     color: white;
     font-size: inherit;
-    font-family: 'BAHNSCHRIFT';
+    font-family: 'CinzelDec';
     font-size: 1.3rem;
+    text-decoration: none;
   }
 
   .nav-dropdown-button:hover{

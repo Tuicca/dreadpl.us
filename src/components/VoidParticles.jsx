@@ -16,12 +16,12 @@ const VoidParticles = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    const particles = Array.from({ length: 60 }, () => ({
+    const particles = Array.from({ length: 65 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      radius: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5,
+      radius: Math.random() * 3 + 1,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
     }));
 
     const draw = () => {

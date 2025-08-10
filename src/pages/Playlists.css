@@ -1,7 +1,13 @@
+@font-face {
+  font-family: 'CinzelDec';
+  src: url('../fonts/CinzelDecorative-Regular.ttf') format('truetype');
+}
+
+
 .playlists-page {
   padding: 2rem;
   color: #fff;
-  font-family: 'BAHNSCHRIFT';
+  font-family: 'CinzelDec';
 }
 
 .playlists-title {
@@ -12,14 +18,14 @@
 .playlists-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 4rem;
   justify-content: center;
 }
 
 .playlist {
-  width: 250px;
+  width: 500px;
   background-color: rgba(0, 0, 0, 0.4);
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 8px;
 }
 
@@ -28,13 +34,18 @@
   text-align: center;
 }
 
-.videos-scroll {
-  max-height: 300px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.videos-scroll::-webkit-scrollbar { /* Chrome, Safari, Edge */
+  display: none;
 }
+
+.videos-scroll {
+  max-height: 90vh;
+  overflow-y: scroll;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE & Edge Legacy */
+}
+
+
 
 .videos-scroll img {
   width: 100%;

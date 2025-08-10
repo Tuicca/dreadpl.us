@@ -1,58 +1,87 @@
-import React from 'react';
-import './Playlists.css';
+import React, { useEffect, useState } from "react";
+import "./Playlists.css";
+import { PLAYLISTS } from "../data/playlists";
 
-const playlists = {
-  Metal: ['CD-E-LDc384', 'tAGnKpE4NCI', 'EOnSh3QlpbQ', 'DnGdoEa1tPg'],
-  'Electronic Atmospheric': ['PLw-VIULmBuWzRQ1i1uS1N1pAVccahJgN9'],
-  Rap: ['eJO5HU_7_1w', 'tvTRZJ-4EyI', 'E_2PfPhRJgU', 'M3mJkSqZbX4'],
-  Classical: ['jgpJVI3tDbY', 'RR2T6-Mz8jI', 'k1Fy5_yT3M8', '9E6b3swbnWg'],
-};
+// oEmbed endpoint yields { title, thumbnail_url, ... } with no API key.
+// If it ever fails or CORS blocks in your env, we fall back to a static cover.
+async function fetchOEmbed(playlistId) {
+  const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/playlist?list=${encodeURIComponent(
+    playlistId
+  )}&format=json`;
+  const res = await fetch(url, { method: "GET" });
+  if (!res.ok) throw new Error(`oEmbed ${res.status}`);
+  return res.json();
+}
 
-const Playlists = () => {
+function PlaylistCard({ playlistId, fallbackCover }) {
+  const [meta, setMeta] = useState(null);
+  const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const data = await fetchOEmbed(playlistId);
+        if (active) setMeta(data);
+      } catch (e) {
+        if (active) setErr(e);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [playlistId]);
+
+  const href = `https://www.youtube.com/playlist?list=${playlistId}`;
+  const title =
+    meta?.title ||
+    `YouTube Playlist (${playlistId.slice(0, 8)}…)`;
+  const thumb =
+    meta?.thumbnail_url || fallbackCover || "/covers/playlist-fallback.jpg";
+
+  return (
+    <a
+      className="playlist-card"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      title={title}
+    >
+      <img
+        loading="lazy"
+        src={thumb}
+        alt={title}
+        className="playlist-thumb"
+      />
+      <div className="playlist-meta">
+        <div className="playlist-title">{title}</div>
+        <div className="playlist-id">{playlistId}</div>
+      </div>
+    </a>
+  );
+}
+
+export default function Playlists() {
   return (
     <div className="playlists-page">
       <h1 className="playlists-title">Playlists</h1>
       <div className="playlists-container">
-        {Object.entries(playlists).map(([genre, videos]) => (
-          <div className="playlist" key={genre}>
+        {Object.entries(PLAYLISTS).map(([genre, ids]) => (
+          <section className="playlist-group" key={genre}>
             <h2 className="playlist-genre">{genre}</h2>
-            <div className="videos-scroll">
-              {genre === 'Electronic Atmospheric' ? (
-                <a
-                  href={`https://www.youtube.com/playlist?list=${videos[0]}`}
-
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img
-
-                    src={`https://img.youtube.com/vi/${videos[0]}/0.jpg`}
-                    alt="YouTube playlist thumbnail"
-                  />
-                </a>
-              ) : (
-                videos.map((id) => (
-                  <a
-                    key={id}
-                    href={`https://www.youtube.com/watch?v=${id}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      src={`https://img.youtube.com/vi/${id}/0.jpg`}
-                      alt="YouTube thumbnail"
-                    />
-                  </a>
-                ))
-              )}
-
+            <div className="playlist-list">
+              {ids.map((pid) => (
+                <PlaylistCard
+                  key={pid}
+                  playlistId={pid}
+                  // Optional per-genre fallback cover:
+                  fallbackCover={`/covers/${genre.replace(/\s+/g, "-").toLowerCase()}.jpg`}
+                />
+              ))}
             </div>
-          </div>
+          </section>
         ))}
       </div>
     </div>
   );
-};
-
-export default Playlists;
-
+}

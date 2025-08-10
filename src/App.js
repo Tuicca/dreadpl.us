@@ -34,7 +34,7 @@ function App() {
   const [dbdVisible, setDBDVisible] = useState(false);
 
 
-  useDocumentTitle('Dread Mythic Plus');
+  useDocumentTitle('Dread Mythic+');
 
   //Fetching Dungeon Data per Member TODO COMBINE
   useEffect(() => {
@@ -145,7 +145,7 @@ const handleMemberClick = (name, realm) => {
                   <div className="content">
                     <div className="affix-container">
                     {/*<ClockBanner/>*/}
-                    <AffixBanner affixes={affixes} />
+                    {/*<AffixBanner affixes={affixes} />*/}
                     {console.log(affixes)}
                     </div>
                     <div className="members-container">
@@ -192,7 +192,7 @@ const handleMemberClick = (name, realm) => {
             </div>
               </>
             )}
-          </>
+                     </>
         }
       />
 
@@ -203,10 +203,10 @@ const handleMemberClick = (name, realm) => {
               <Navbar />
               <Playlists />
               <Footer />
-            </>
-          }
-        />
-
+          </>
+        }
+      />
+      
         {/*<Route path="analytics"
           element={<Analytics />}
       />*/}

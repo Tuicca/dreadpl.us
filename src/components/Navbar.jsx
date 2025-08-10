@@ -37,7 +37,7 @@ const Navbar = (props) => {
 
   return (
     <nav className="navbar">
-      <div className="nav-logo" data-text="Dread+">Dread+</div>
+      <a href="/" className="nav-logo" data-text="Dread+">Dread+</a>
 
       <div className="nav-banner-container">
     <div className="nav-banner">
@@ -80,7 +80,7 @@ const Navbar = (props) => {
           )}
         </li>
         <li className="nav-item-playlists">
-          <Link to="/playlists">Playlists</Link>
+          <Link to="/playlists" className="nav-dropdown-button">Playlists</Link>
         </li>
         <li className="nav-item-about">
         <ScrollLink
