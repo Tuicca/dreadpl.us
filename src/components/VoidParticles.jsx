@@ -27,7 +27,7 @@ const VoidParticles = () => {
 
     const supernovaParticles = [];
 
-    const supernovaChance = 0.001; // ~0.1% chance per frame for a very rare supernova
+    const supernovaChance = 0.005;
 
     const draw = () => {
       ctx.fillStyle = 'rgba(11,11,22,0.6)';
