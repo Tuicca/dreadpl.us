@@ -70,14 +70,18 @@
   
   .dungeon-info {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    /*align-items: center;*/
-    padding: 5px 0;
-    cursor: pointer;
-    transition: 0.2;
-    z-index: 2;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 6px 10px;            /* add some hit area */
+    border-radius: 10px;           /* so highlight has shape */
+    transition: background-color .15s ease, box-shadow .15s ease, transform .1s ease;
   }
+  .highlight {
+  background: radial-gradient(120% 120% at 10% 10%, rgba(108,92,231,.22), transparent 60%),
+              radial-gradient(120% 120% at 90% 90%, rgba(255,45,149,.18), transparent 60%);
+  box-shadow: 0 0 0 2px rgba(124,85,231,.35), 0 8px 18px rgba(0,0,0,.25);
+  transform: translateY(-1px);
+}
   
   .dungeon-name,
   .fdungeon-name,
@@ -94,7 +98,7 @@
     color: white;
     text-align: center;
     justify-self: center; 
-    font-size: 16px;
+    font-size: 17px;
   }
   
   .dungeon-time {
@@ -131,6 +135,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 14px;
   }
 
   .dungeon-breakdown-container {

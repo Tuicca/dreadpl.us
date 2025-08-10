@@ -38,6 +38,7 @@
     font-family: 'CinzelDec';
     margin: 0;
     padding: 20px;
+    
 
   }
   
@@ -48,6 +49,10 @@
     font-size: 1.3rem;
     transition: color 0.3s;
     cursor: pointer;
+  }
+
+  .nav-item-about:hover{
+    opacity: 70%;
   }
 
   .nav-item-playlists {
@@ -165,7 +170,8 @@
   }
 
   .nav-dropdown-button:hover{
-    background-color: transparent;
+    /*background-color: transparent;*/
+    opacity: 70%;
   }
   
   .nav-dropdown {
@@ -198,5 +204,6 @@
   }
   
   .nav-dropdown a:hover {
-    color: #000;
+    /*color: #000;*/
+    opacity: 60%;
   }
