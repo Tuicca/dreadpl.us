@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+import axios from 'axios';
 
 import './Navbar.css';
 
 
 const Navbar = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [expansion, setExpansion] = useState('The War Within');
+  const [season, setSeason] = useState('Season 3');
+
+  useEffect(() => {
+    const fetchSeason = async () => {
+      try {
+        const res = await axios.get('https://raider.io/api/v1/mythic-plus/season-index');
+        const seasons = res?.data?.seasons;
+        if (Array.isArray(seasons) && seasons.length > 0) {
+          const current = seasons.find(s => s.is_current || s.isCurrent) || seasons[0];
+          if (current?.name) {
+            const parts = current.name.split(':').map(s => s.trim());
+            if (parts[0]) setExpansion(parts[0]);
+            if (parts[1]) setSeason(parts[1]);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch season data', err);
+      }
+    };
+    fetchSeason();
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -14,17 +37,17 @@ const Navbar = (props) => {
   return (
     <nav className="navbar">
       <div className="nav-logo" data-text="Dread+">Dread+</div>
-      
-      <div className="nav-banner-container">
-  <div className="nav-banner">
-    <h1 >
-      The War Within: Season 2
-    </h1>
-  </div>
-</div>
 
-      
-    
+      <div className="nav-banner-container">
+    <div className="nav-banner">
+      <h1 >
+        {`${expansion}: ${season}`}
+      </h1>
+    </div>
+  </div>
+
+
+
       <ul className="nav-links">
       <li className="nav-item-dropdown">
           <button onClick={toggleDropdown} className="nav-dropdown-button">
