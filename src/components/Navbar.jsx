@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './Navbar.css';
@@ -78,8 +79,11 @@ const Navbar = (props) => {
             </ul>
           )}
         </li>
+        <li className="nav-item-playlists">
+          <Link to="/playlists">Playlists</Link>
+        </li>
         <li className="nav-item-about">
-        <Link
+        <ScrollLink
             activeClass="active"
             to="about"
             spy={true}
@@ -87,7 +91,7 @@ const Navbar = (props) => {
             offset={-70}
             duration={500}
             >About
-          </Link>
+          </ScrollLink>
         </li>
        
       </ul>
