@@ -1,10 +1,9 @@
 .App {
   text-align: center;
-  background-color: #282a36;
+  background-color: transparent;
 }
 .affix-container {
-
-  background-color: #282a36;
+  background-color: transparent;
 }
 
 .App-logo {
@@ -43,12 +42,14 @@
 }
 
 .content{
-  background-color: #282a36;
+  background-color: transparent;
 }
 
 .page-container{
-  background-color: #282a36;
+  background-color: transparent;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .members-wrapper {
