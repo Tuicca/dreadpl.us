@@ -46,15 +46,6 @@
     cursor: pointer;
   }
   
-  .nav-item-mpc a {
-    margin-left: 2rem;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.3rem;
-    text-decoration: none;
-    transition: color 0.3s;
-    cursor: pointer;
-  }
 
   .nav-banner-container {
     position: absolute;
