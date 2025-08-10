@@ -24,7 +24,9 @@ const VoidParticles = () => {
       dy: (Math.random() - 0.5) * 0.4,
     }));
 
+
     const supernovaParticles = [];
+
     const supernovaChance = 0.001; // ~0.1% chance per frame for a very rare supernova
 
     const draw = () => {
@@ -45,6 +47,7 @@ const VoidParticles = () => {
 
       if (Math.random() < supernovaChance) {
         const p = particles[Math.floor(Math.random() * particles.length)];
+
         const fragments = 8 + Math.floor(Math.random() * 8);
         for (let i = 0; i < fragments; i++) {
           const angle = Math.random() * Math.PI * 2;
@@ -71,11 +74,14 @@ const VoidParticles = () => {
         const alpha = 1 - dist / 20;
         if (alpha <= 0) {
           supernovaParticles.splice(i, 1);
+
           continue;
         }
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+
         ctx.fillStyle = `rgba(128,0,255,${alpha * 0.3})`;
+
         ctx.fill();
       }
 
