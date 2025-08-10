@@ -6,31 +6,7 @@ const affixColorMapping = {
     //Alternating by Week
     'Fortified': '#F07900',
     'Tyrannical': '#F07900',
-
-    //Easy
-    'Volcanic': '#3dff00',
-    'Storming': '#3dff00',
-    'Bolstering': '#3dff00',
-
-    //Medium
-    'Explosive': '#F07900',
-    'Spiteful': '#F07900',
-    'Grievous': '#F07900',
-    'Bursting': '#F07900',
-
-    //Hard
-    'Raging': '#FF0037',
-    'Quaking': '#FF0037',
-    'Sanguine': '#FF0037',
-
-
-    //Purple (Special - Dragonflight DEPRICATED)
-    'Incorporeal': '#A020F0',
-    'Afflicted' : '#A020F0',
-    'Entangling': '#A020F0',
-
-    //Seasonal - changes often
-    'Thundering':'#3399dd',
+    
     'Xal\'atath\'s Bargain: Pulsar':'#54b4e7',
     'Xal\'atath\'s Bargain: Devour':'#0096FF',
     'Xal\'atath\'s Guile':'#268050',
@@ -50,7 +26,7 @@ const AffixBanner = ({ affixes }) => {
     const affixNames = parseAffixes(affixes);
 
     return(
-            <div className="affix-header" style={{ backgroundColor: '#282a36' }}> 
+            <div className="affix-header" style={{ backgroundColor: 'transparent' }}> 
                 {affixNames.reduce((acc, affix, index) => {
 
             acc.push(

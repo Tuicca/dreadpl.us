@@ -1,105 +1,242 @@
+/* ==== Void Wave + Breathing Border ==== */
+:root {
+  --void-radius: 15px;
+
+  /* wave speeds */
+  --void-speed-x: 6s;
+  --void-speed-y: 7.5s;
+
+  /* breathing */
+  --void-thickness-base: 2px; /* minimum border size */
+  --void-thickness-amp: 4px;  /* swelling amount */
+
+  /* palette */
+  --void-c1: #00a3ff;
+  --void-c2: #7c55e7;
+  --void-c3: #ff2d95;
+}
+
+/* Animatable custom properties */
+@property --x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --t {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* Role icon */
 .member-role-icon {
-    width: 32px;
-    height: auto;
-    margin-left: 10px; /* adjust the spacing between the text and the icon */
-  }
+  width: 32px;
+  height: auto;
+  margin-left: 10px;
+}
 
-  .members-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 150px;
-    padding-bottom: 120px;
-    gap: 50px; /* space between Member components */
-    background-color: transparent;
-    max-width: calc(100% - 660px); /* Adjust the width of the container */
-    margin: 0 auto; /* Center the container */
-    
-  }
+/* Container for all members */
+.members-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 150px;
+  padding-bottom: 120px;
+  gap: 50px;
+  background-color: transparent;
+  max-width: calc(100% - 660px);
+  margin: 0 auto;
+}
 
-  .member-class-spec {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0;
-  }
+/* Class/spec row */
+.member-class-spec {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
 
-  .member-score{
-    font-size: 1.3rem;
-  }
+/* Score text */
+.member-score {
+  font-size: 1.3rem;
+}
 
-  .member {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2);
-    padding: 85px;
-    width: 110px;
-    margin: 15px;
-    background-color: transparent;
-    color: white;
-    border-radius: 15px;
-    transition-duration: 0.2s; 
-    border: 1px solid rgba(238, 228, 228, 0.116);
-  }
+/* ---- Member card ---- */
+.member {
+  --void-thickness: calc(
+    var(--void-thickness-base) +
+    var(--void-thickness-amp) * var(--t)
+  );
 
-  .member-image {
-    width: 100px;
-    height: auto;
-    border-radius: 15px;
-  }
-  
-  .member-link {
-    text-decoration: none;
-    color: inherit;
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2);
+  padding: 85px;
+  width: 110px;
+  margin: 15px;
+  background-color: transparent;
+  color: white;
+  border-radius: var(--void-radius);
+  transition-duration: 0.2s;
+  border: 1px solid transparent;
+  isolation: isolate;
+}
 
-  .member:hover {
-    cursor: pointer;
-    background-color: transparent;
-    transform: scale(1.1);
-  }
+/* Pulsing wave: top + bottom edges */
+.member::before {
+  --x: 0%;
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--void-thickness));
+  padding: var(--void-thickness);
+  border-radius: calc(var(--void-radius) + var(--void-thickness));
 
-  .remove-member-btn {
-    padding: 0.4rem 1.6rem;
-    font-size: 1.0rem;
-    font-weight: bold;
-    border-radius: 10px;
-    color: #e0dddd;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-top: 1.6rem;
-    transition: 0.3s;
-  }
-  
-  .remove-member-btn:hover {
-    background-color: transparent;
-  }
+  background:
+    linear-gradient(90deg, transparent 0 30%, var(--void-c1) 40%, var(--void-c2) 50%, var(--void-c3) 60%, transparent 70% 100%) top left / 300% var(--void-thickness) no-repeat,
+    linear-gradient(90deg, transparent 0 30%, var(--void-c3) 40%, var(--void-c2) 50%, var(--void-c1) 60%, transparent 70% 100%) bottom left / 300% var(--void-thickness) no-repeat;
 
-  .redirect-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 5px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 10px;
-    color: #fff;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-position: var(--x) 0, calc(100% - var(--x)) 100%;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  filter: drop-shadow(0 0 10px rgba(124, 85, 231, 0.55));
+  animation:
+    wave-x var(--void-speed-x) linear infinite,
+    void-breathe 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Pulsing wave: left + right edges */
+.member::after {
+  --y: 0%;
+  content: "";
+  position: absolute;
+  inset: calc(-1.5 * var(--void-thickness));
+  padding: var(--void-thickness);
+  border-radius: calc(var(--void-radius) + 1.5 * var(--void-thickness));
+
+  background:
+    linear-gradient(0deg, transparent 0 30%, var(--void-c1) 40%, var(--void-c2) 50%, var(--void-c3) 60%, transparent 70% 100%) top left / var(--void-thickness) 300% no-repeat,
+    linear-gradient(0deg, transparent 0 30%, var(--void-c3) 40%, var(--void-c2) 50%, var(--void-c1) 60%, transparent 70% 100%) top right / var(--void-thickness) 300% no-repeat;
+
+  background-position: 0 var(--y), 100% calc(100% - var(--y));
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  filter: blur(10px) drop-shadow(0 0 12px rgba(255, 45, 149, 0.45));
+  opacity: 0.7;
+  animation:
+    wave-y var(--void-speed-y) linear infinite,
+    void-breathe 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.member:hover::after {
+  opacity: 0.9;
+  filter: blur(12px) drop-shadow(0 0 16px rgba(124, 85, 231, 0.55));
+}
+
+/* Image inside card */
+.member-image {
+  width: 100px;
+  height: auto;
+  border-radius: 15px;
+}
+
+/* Link styling */
+.member-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hover scaling */
+.member:hover {
+  cursor: pointer;
+  background-color: transparent;
+  transform: scale(1.1);
+}
+
+/* Remove button */
+.remove-member-btn {
+  padding: 0.4rem 1.6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  color: #e0dddd;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 1.6rem;
+  transition: 0.3s;
+}
+
+.remove-member-btn:hover {
+  background-color: transparent;
+}
+
+/* Redirect button */
+.redirect-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirect-btn:hover {
+  background-color: transparent;
+}
+
+.redirect-icon {
+  width: 25px;
+  height: auto;
+}
+
+/* Animations */
+@keyframes wave-x {
+  0%   { --x: 0%; }
+  100% { --x: 100%; }
+}
+@keyframes wave-y {
+  0%   { --y: 0%; }
+  100% { --y: 100%; }
+}
+@keyframes void-breathe {
+  0%   { --t: 0;   filter: brightness(1); }
+  50%  { --t: 1;   filter: brightness(1.15); }
+  100% { --t: 0;   filter: brightness(1); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .member::before,
+  .member::after {
+    animation: none;
   }
-  
-  .redirect-btn:hover {
-    background-color: transparent;
-  }
-  
-  .redirect-icon {
-    width: 25px;
-    height: auto;
-  }
+}
