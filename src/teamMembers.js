@@ -8,7 +8,7 @@ const teamMembers = [
   { server: 'Zul\'jin', name: 'Jazzpie' },
   { server: 'Frostmane', name: 'PoopaVlad' },
   { server: 'Frostmane', name: 'Pugchimp' },
-  { server: 'Ner\'zhul', name: 'Scribbl' }
+  { server: 'Ner\'zhul', name: 'Scribbl' },
 
 ];
 export default teamMembers
