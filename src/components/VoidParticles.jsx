@@ -10,8 +10,10 @@ const VoidParticles = () => {
     let animationFrameId;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.visualViewport 
+    ? window.visualViewport.height 
+    : document.documentElement.clientHeight;
     };
     resize();
     window.addEventListener('resize', resize);
@@ -30,7 +32,7 @@ const VoidParticles = () => {
     const supernovaChance = 0.005;
 
     const draw = () => {
-      ctx.fillStyle = 'rgba(11,11,22,0.6)';
+      ctx.fillStyle = 'rgba(11,11,22,0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         p.x += p.dx;

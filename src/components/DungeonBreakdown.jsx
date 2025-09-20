@@ -70,7 +70,7 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
                 <div key={index} className="member-dungeons">
                   <div className="member-name">{data.character.name}</div>
                   <div className="run-types">
-                  <div className="fortified-runs">
+                  {/* <div className="fortified-runs">
                       <h3>Fortified</h3>
                       <ul>
                         {fortifiedRuns.map((run, i) => (
@@ -86,10 +86,10 @@ const DungeonBreakdown = ({dungeonData, setKeyLevels}) => {
                           </div>
                         ))}
                       </ul>
-                    </div>
+                    </div> */}
                     <div className="tyrannical-runs">
-                      <h3>Tyrannical</h3>
-                      <ul>
+                      <h3>Best Run</h3>
+                      <ul style={{padding:'0'}}>
                         {tyrannicalRuns.map((run, i) => (
                           <div key={i} className={`dungeon-info ${
                             run.dungeon === highlightedDungeon &&
